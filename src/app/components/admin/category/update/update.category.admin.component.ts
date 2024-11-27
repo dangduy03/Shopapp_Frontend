@@ -35,7 +35,7 @@ export class UpdateCategoryAdminComponent implements OnInit {
 
   ngOnInit(): void {    
     this.route.paramMap.subscribe(params => {
-      debugger
+      
       this.categoryId = Number(params.get('id'));
       this.getCategoryDetails();
     });
@@ -51,11 +51,12 @@ export class UpdateCategoryAdminComponent implements OnInit {
         
       },
       error: (error: HttpErrorResponse) => {
-        debugger;
+        ;
         console.error(error?.error?.message ?? '');
       } 
     });     
   }
+
   updateCategory() {
     // Implement your update logic here
     const updateCategoryDTO: UpdateCategoryDTO = {
@@ -63,14 +64,14 @@ export class UpdateCategoryAdminComponent implements OnInit {
     };
     this.categoryService.updateCategory(this.updatedCategory.id, updateCategoryDTO).subscribe({
       next: (response: any) => {  
-        debugger        
+                
       },
       complete: () => {
-        debugger;
+        ;
         this.router.navigate(['/admin/categories']);        
       },
       error: (error: HttpErrorResponse) => {
-        debugger;
+        ;
         console.error(error?.error?.message ?? '');
       } 
     });  

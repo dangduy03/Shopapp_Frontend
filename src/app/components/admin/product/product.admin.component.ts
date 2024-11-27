@@ -24,6 +24,7 @@ import { ApiResponse } from '../../../reponses/api.response';
     FormsModule,
   ]
 })
+
 export class ProductAdminComponent implements OnInit {
     selectedCategoryId: number  = 0; // Giá trị category được chọn
     products: Product[] = [];        
@@ -44,12 +45,14 @@ export class ProductAdminComponent implements OnInit {
     ) {
       this.localStorage = document.defaultView?.localStorage;
     }
+
     ngOnInit() {
       this.currentPage = Number(this.localStorage?.getItem('currentProductAdminPage')) || 0; 
       this.getProducts(this.keyword, 
         this.selectedCategoryId, 
         this.currentPage, this.itemsPerPage);      
     }    
+
     searchProducts() {
       this.currentPage = 0;
       this.itemsPerPage = 12;
@@ -57,6 +60,7 @@ export class ProductAdminComponent implements OnInit {
       
       this.getProducts(this.keyword.trim(), this.selectedCategoryId, this.currentPage, this.itemsPerPage);
     }
+
     getProducts(keyword: string, selectedCategoryId: number, page: number, limit: number) {
       
       this.productService.getProducts(keyword, selectedCategoryId, page, limit).subscribe({
@@ -65,7 +69,8 @@ export class ProductAdminComponent implements OnInit {
           const products = apiResponse?.data as Product[]          
           products.forEach((product: Product) => {                      
             if (product) {
-              product.url = `${environment.apiBaseUrl}/products/images/${product.thumbnail}`;
+              // product.url = `${environment.apiBaseUrl}/products/images/${product.thumbnail}`;
+              product.url = `${environment.minioUrl}/${product.thumbnail}`;
             }          
           });
           this.products = products;
@@ -81,6 +86,7 @@ export class ProductAdminComponent implements OnInit {
         }
       });    
     }
+
     onPageChange(page: number) {
       ;
       this.currentPage = page < 0 ? 0 : page;
@@ -116,6 +122,7 @@ export class ProductAdminComponent implements OnInit {
       // Điều hướng đến trang detail-product với productId là tham số
       this.router.navigate(['/admin/products/update', productId]);
     }  
+    
     deleteProduct(product: Product) {      
       const confirmation = window
       .confirm('Are you sure you want to delete this product?');

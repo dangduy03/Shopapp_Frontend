@@ -33,6 +33,7 @@ import { TokenService } from '../../service/token.service';
     ReactiveFormsModule,   
   ],
 })
+
 export class UserProfileComponent implements OnInit {
   userResponse?: UserResponse;
   userProfileForm: FormGroup;
@@ -81,6 +82,7 @@ export class UserProfileComponent implements OnInit {
       }
     })
   }
+
   passwordMatchValidator(): ValidatorFn {
     return (formGroup: AbstractControl): ValidationErrors | null => {
       const password = formGroup.get('password')?.value;

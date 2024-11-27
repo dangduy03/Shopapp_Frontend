@@ -12,6 +12,7 @@
         <button class="btn btn-primary" (click)="searchOrders()">Tìm kiếm</button>
       </div>
     </div>
+
     <table class="table">
         <thead>
           <tr>
@@ -35,6 +36,7 @@
             <th>Action</th>
           </tr>
         </thead>
+
         <tbody>
           @for(order of orders; track order.id){
             <tr>
@@ -72,6 +74,7 @@
           }          
         </tbody>
       </table>
+      
     <div class="d-flex justify-content-center">
         <nav aria-label="Page navigation">
             <ul class="pagination">
@@ -85,6 +88,7 @@
                       (click)="onPageChange(currentPage - 1)">Previous</a>
                   </li>
                 }
+                
                 @for(page of visiblePages; track page) {
                   <ng-container>
                     <li class="page-item" [ngClass]="{'active': page === currentPage}">

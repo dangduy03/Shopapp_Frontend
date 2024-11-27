@@ -1,9 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
-import { NgModule } from '@angular/core';
-
-import { Observable } from 'rxjs';
 import { Location } from '@angular/common';
 import { CommonModule,DOCUMENT } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -22,6 +18,7 @@ import { ApiResponse } from '../../../reponses/api.response';
     FormsModule,
   ]
 })
+
 export class OrderAdminComponent implements OnInit{  
   orders: OrderResponse[] = [];
   currentPage: number = 0;
@@ -41,11 +38,12 @@ export class OrderAdminComponent implements OnInit{
   ) {
     this.localStorage = document.defaultView?.localStorage;
   }
+
   ngOnInit(): void {
-    
     this.currentPage = Number(this.localStorage?.getItem('currentOrderAdminPage')) || 0; 
     this.getAllOrders(this.keyword, this.currentPage, this.itemsPerPage);
   }
+
   searchOrders() {
     this.currentPage = 0;
     this.itemsPerPage = 12;
@@ -53,8 +51,9 @@ export class OrderAdminComponent implements OnInit{
     
     this.getAllOrders(this.keyword.trim(), this.currentPage, this.itemsPerPage);
   }
+
   getAllOrders(keyword: string, page: number, limit: number) {
-    
+ 
     this.orderService.getAllOrders(keyword, page, limit).subscribe({
       next: (apiResponse: ApiResponse) => {
                 
@@ -71,6 +70,7 @@ export class OrderAdminComponent implements OnInit{
       }
     });    
   }
+
   onPageChange(page: number) {
     ;
     this.currentPage = page < 0 ? 0 : page;
@@ -99,22 +99,19 @@ export class OrderAdminComponent implements OnInit{
     if (confirmation) {
       
       this.orderService.deleteOrder(id).subscribe({
-        next: (response: ApiResponse) => {
-           
+        next: (response: ApiResponse) => { 
           location.reload();          
         },
-        complete: () => {
-          ;          
+        complete: () => {         
         },
         error: (error: HttpErrorResponse) => {
-          ;
           console.error(error?.error?.message ?? '');
         }
       });    
     }
   }
-  viewDetails(order:OrderResponse) {
-    
+
+  viewDetails(order:OrderResponse) { 
     this.router.navigate(['/admin/orders', order.id]);
   }
   

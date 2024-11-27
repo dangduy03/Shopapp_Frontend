@@ -5,10 +5,10 @@ import { OrderDetail } from '../../models/order.detail';
 import { environment } from '../../../environments/environment';
 import { FooterComponent } from '../footer/footer.component';
 import { HeaderComponent } from '../header/header.component';
-import { FormsModule } from '@angular/forms';
-import { CommonModule, NgIf } from '@angular/common';
-import { ActivatedRoute, RouterModule } from '@angular/router';
-import { HttpClientModule, HttpErrorResponse } from '@angular/common/http';
+
+import { CommonModule} from '@angular/common';
+import { ActivatedRoute} from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 import { ApiResponse } from '../../reponses/api.response';
 
 @Component({
@@ -17,10 +17,6 @@ import { ApiResponse } from '../../reponses/api.response';
   imports: [
     HeaderComponent,
     FooterComponent,
-    FormsModule,
-    NgIf,
-    RouterModule,
-    HttpClientModule,
     CommonModule,
   ],
   templateUrl: './detail-order.component.html',
@@ -45,6 +41,7 @@ export class OrderDetailComponent implements OnInit {
     payment_method: '',
     order_details: [] // Một mảng rỗng
   };  
+  
   constructor(
     private orderService: OrderService,
     private route: ActivatedRoute

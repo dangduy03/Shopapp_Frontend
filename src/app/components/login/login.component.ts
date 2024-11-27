@@ -20,14 +20,8 @@ import { ApiResponse } from '../../reponses/api.response';
   standalone: true,
   imports: [
     HeaderComponent,
-    FooterComponent,
     FormsModule,
-    NgIf,
-    RouterModule,
-    HttpClientModule,
     CommonModule,
-    // ActivatedRoute
-
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
@@ -50,8 +44,8 @@ export class LoginComponent implements OnInit{
   password: string = '11223344';
 
   */
-  phoneNumber: string = '33445566';
-  password: string = '123456789';
+  phoneNumber: string = '';
+  password: string = '';
   showPassword: boolean = false;
 
   roles: Role[] = []; // Mảng roles
@@ -91,11 +85,13 @@ export class LoginComponent implements OnInit{
       } 
     });
   }
+
   createAccount() {
     
     // Chuyển hướng người dùng đến trang đăng ký (hoặc trang tạo tài khoản)
     this.router.navigate(['/register']); 
   }
+
   login() {
     const message = `phone: ${this.phoneNumber}` +
                     `password: ${this.password}`;
@@ -149,6 +145,7 @@ export class LoginComponent implements OnInit{
       } 
     });
   }
+  
   togglePassword() {
     this.showPassword = !this.showPassword;
   }

@@ -5,6 +5,7 @@
         <button class="btn btn-success" (click)="insertCategory()">Thêm danh mục mới</button>
       </div>      
     </div>
+
     <table class="table">
       <thead class="table-light">
         <tr>
@@ -13,6 +14,7 @@
           <th>Actions</th>
         </tr>
       </thead>
+      
       <tbody>        
         @for(category of categories; track category.id){
           <tr>

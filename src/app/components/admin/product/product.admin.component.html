@@ -65,14 +65,16 @@
                 <i class="fa fa-chevron-left"></i>
               </a>
             </li>
-          }          
+          }         
+
           @for(page of visiblePages; track page) {
             <ng-container>
               <li class="page-item" [ngClass]="{'active': page === currentPage + 1}">
                 <a class="page-link" (click)="onPageChange(page - 1)">{{ page }}</a>
               </li>
             </ng-container>
-          }          
+          }  
+                  
           @if(currentPage < totalPages - 1)   {
             <li class="page-item">
               <a class="page-link" (click)="onPageChange(currentPage + 1)">

@@ -22,6 +22,7 @@
                         </div>
                     }                        
                 </div>
+
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
                     <input type="text" 
@@ -55,6 +56,7 @@
                             </div>
                         }                        
                 </div>
+
                 <div class="mb-3">
                     <label for="address" class="form-label">Địa chỉ</label>
                     <input type="text" 
@@ -69,9 +71,9 @@
                     <div class="invalid-feedback">
                         Địa chỉ là trường bắt buộc và ít nhất 5 ký tự.
                     </div>
-                    }
-                    
+                    }     
                 </div>
+
                 <div class="mb-3">
                     <label for="note" class="form-label">Ghi chú</label>
                     <input type="text" 
@@ -81,6 +83,7 @@
                         required
                         id="note">
                 </div>
+
                 <div class="mb-3">
                     <label for="shippingMethod">Phương thức vận chuyển</label>
                     <select class="form-control" id="shippingMethod" 
@@ -89,6 +92,7 @@
                         <option value="normal">Thường (Normal)</option>
                     </select>
                 </div>
+
                 <div class="mb-3">
                     <label for="paymentMethod">Phương thức thanh toán</label>
                     <select class="form-control" id="paymentMethod"
@@ -98,7 +102,8 @@
                     </select>
                 </div>
             <!-- </form> -->
-        </div>        
+        </div>  
+
         <div class="col-md-7">
             <h2 class="product-order">Sản phẩm đã đặt hàng</h2>
             <table>
@@ -146,6 +151,7 @@
                         class="btn btn-gradient" type="button">Áp dụng</button>
                 </div>
             </div>    
+            
             @if(couponDiscount > 0) {
                 <div class="text-start mt-3">
                     <h6 class="header-text text-end ">Bạn được discount: {{ couponDiscount | number:'1.2-2'}} đ</h6>

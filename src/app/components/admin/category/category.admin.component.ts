@@ -20,6 +20,7 @@ import { ApiResponse } from '../../../reponses/api.response';
     FormsModule,
   ]
 })
+
 export class CategoryAdminComponent implements OnInit {
   categories: Category[] = []; // Dữ liệu động từ categoryService
   constructor(    
@@ -30,6 +31,7 @@ export class CategoryAdminComponent implements OnInit {
     ngOnInit() {      
       this.getCategories(0, 100);
     }
+
     getCategories(page: number, limit: number) {
       this.categoryService.getCategories(page, limit).subscribe({
         next: (apiResponse: ApiResponse) => {
@@ -45,6 +47,7 @@ export class CategoryAdminComponent implements OnInit {
         }
       });
     }
+
     insertCategory() {
       
       // Điều hướng đến trang detail-category với categoryId là tham số
@@ -56,6 +59,7 @@ export class CategoryAdminComponent implements OnInit {
             
       this.router.navigate(['/admin/categories/update', categoryId]);
     }  
+    
     deleteCategory(category: Category) {      
       const confirmation = window
       .confirm('Are you sure you want to delete this category?');

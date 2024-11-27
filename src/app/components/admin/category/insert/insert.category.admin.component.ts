@@ -5,7 +5,7 @@ import { InsertCategoryDTO } from '../../../../dtos/category/insert.category.dto
 import { Category } from '../../../../models/category';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { CategoryService } from '../../../../service/category.service';
 import { ProductService } from '../../../../service/product.service';
 
@@ -14,38 +14,40 @@ import { ProductService } from '../../../../service/product.service';
   templateUrl: './insert.category.admin.component.html',
   styleUrls: ['./insert.category.admin.component.scss'],
   standalone: true,
-  imports: [   
+  imports: [
     CommonModule,
-    FormsModule,    
+    FormsModule,
   ]
 })
+
 export class InsertCategoryAdminComponent implements OnInit {
   insertCategoryDTO: InsertCategoryDTO = {
-    name: '',    
+    name: '',
   };
+
   categories: Category[] = []; // Dữ liệu động từ categoryService
-  constructor(    
+  constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private categoryService: CategoryService,    
-    private productService: ProductService,    
+    private categoryService: CategoryService,
+    private productService: ProductService,
   ) {
-    
-  } 
-  ngOnInit() {
-    
-  }   
 
-  insertCategory() {    
+  }
+  ngOnInit() {
+
+  }
+
+  insertCategory() {
     this.categoryService.insertCategory(this.insertCategoryDTO).subscribe({
       next: (response) => {
-        
-        this.router.navigate(['/admin/categories']);        
+
+        this.router.navigate(['/admin/categories']);
       },
       error: (error: HttpErrorResponse) => {
         ;
         console.error(error?.error?.message ?? '');
-      }        
-    });    
+      }
+    });
   }
 }

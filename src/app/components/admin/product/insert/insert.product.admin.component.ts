@@ -21,6 +21,7 @@ import { ApiResponse } from '../../../../reponses/api.response';
     FormsModule,
   ]
 })
+
 export class InsertProductAdminComponent implements OnInit {
   insertProductDTO: InsertProductDTO = {
     name: '',
@@ -29,6 +30,7 @@ export class InsertProductAdminComponent implements OnInit {
     category_id: 1,
     images: []
   };
+
   categories: Category[] = []; // Dữ liệu động từ categoryService
   constructor(    
     private route: ActivatedRoute,
@@ -40,7 +42,8 @@ export class InsertProductAdminComponent implements OnInit {
   } 
   ngOnInit() {
     this.getCategories(1, 100)
-  } 
+  }
+
   getCategories(page: number, limit: number) {
     this.categoryService.getCategories(page, limit).subscribe({
       next: (apiResponse: ApiResponse) => {
@@ -56,6 +59,7 @@ export class InsertProductAdminComponent implements OnInit {
       }
     });
   }
+  
   onFileChange(event: any) {
     // Retrieve selected files from input element
     const files = event.target.files;
