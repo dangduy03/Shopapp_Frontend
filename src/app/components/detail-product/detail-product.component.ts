@@ -6,10 +6,9 @@ import { ProductService } from '../../service/product.service';
 import { CartService } from '../../service/cart.service';
 import { ProductImage } from '../../models/product.image';
 import { environment } from '../../../environments/environment';
-import { CommonModule, NgClass, NgFor } from '@angular/common';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { CategoryService } from '../../service/category.service';
-import { HttpClientModule, HttpErrorResponse } from '@angular/common/http';
+import { CommonModule} from '@angular/common';
+import { ActivatedRoute, Router} from '@angular/router';
+import {HttpErrorResponse } from '@angular/common/http';
 import { ApiResponse } from '../../reponses/api.response';
 
 @Component({
@@ -18,12 +17,7 @@ import { ApiResponse } from '../../reponses/api.response';
   imports: [
     HeaderComponent, 
     FooterComponent,
-    NgClass,
-    NgFor,
     CommonModule,
-    RouterModule,
-    HttpClientModule,
-
   ],
   templateUrl: './detail-product.component.html',
   styleUrl: './detail-product.component.scss'
@@ -44,7 +38,8 @@ export class DetailProductComponent implements OnInit {
       private router: Router,
     ) {
       
-    }
+    } 
+
     ngOnInit() {
       // Lấy productId từ URL      
       const idParam = this.activatedRoute.snapshot.paramMap.get('id');
@@ -84,6 +79,7 @@ export class DetailProductComponent implements OnInit {
         console.error('Invalid productId:', idParam);
       }      
     }
+
     showImage(index: number): void {
       
       if (this.product && this.product.product_images && 
@@ -98,11 +94,13 @@ export class DetailProductComponent implements OnInit {
         this.currentImageIndex = index;
       }
     }
+
     thumbnailClick(index: number) {
       
       // Gọi khi một thumbnail được bấm
       this.currentImageIndex = index; // Cập nhật currentImageIndex
-    }  
+    } 
+
     nextImage(): void {
       
       this.showImage(this.currentImageIndex + 1);
@@ -111,7 +109,8 @@ export class DetailProductComponent implements OnInit {
     previousImage(): void {
       
       this.showImage(this.currentImageIndex - 1);
-    }      
+    } 
+
     addToCart(): void {
       
       this.isPressedAddToCart = true;
@@ -133,12 +132,15 @@ export class DetailProductComponent implements OnInit {
         this.quantity--;
       }
     }
+
     getTotalPrice(): number {
       if (this.product) {
         return this.product.price * this.quantity;
       }
       return 0;
     }
+
+    
     buyNow(): void {      
       if(this.isPressedAddToCart == false) {
         this.addToCart();

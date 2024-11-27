@@ -26,6 +26,7 @@ import { ApiResponse } from '../../reponses/api.response';
     FormsModule
   ]
 })
+
 export class HomeComponent implements OnInit {
   products: Product[] = [];
   categories: Category[] = []; // Dữ liệu động từ categoryService

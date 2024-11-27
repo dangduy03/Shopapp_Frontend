@@ -19,17 +19,20 @@
               </div>  
             }            
           </div>
+
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" 
                   data-bs-slide="prev" (click)="previousImage()">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
           </button>
+
           <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" 
                   data-bs-slide="next" (click)="nextImage()">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
           </button>
         </div>
+
         <div class="row">
           <div class="thumbnail-container">
             @for(image of product?.product_images; 
@@ -41,10 +44,10 @@
                   <img [src]="image.image_url" class="thumbnail-image" alt="Thumbnail Image">
                 </div>
             }
-            
           </div>
         </div>
       </div>
+      
       <div class="col-md-6">
         <div class="product-details">
           <h2>{{ product?.name }}</h2>

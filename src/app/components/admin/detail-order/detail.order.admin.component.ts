@@ -1,16 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { inject } from '@angular/core';
-
-import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { OrderDTO } from '../../../dtos/order/order.dto';
 
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { OrderResponse } from '../../../reponses/order/order.response';
 import { OrderService } from '../../../service/order.service';
 import { ApiResponse } from '../../../reponses/api.response';
@@ -46,6 +42,7 @@ export class DetailOrderAdminComponent implements OnInit{
     order_details: [],
     
   };  
+
   private orderService = inject(OrderService);
   constructor(    
     private route: ActivatedRoute,
@@ -77,14 +74,17 @@ export class DetailOrderAdminComponent implements OnInit{
             response.order_date[1] - 1, 
             response.order_date[2]
           );        
-        }        
+        }   
+
         this.orderResponse.order_details = response.order_details
           .map((order_detail:any) => {
-          order_detail.product.thumbnail = `${environment.apiBaseUrl}/products/images/${order_detail.product.thumbnail}`;
+          // order_detail.product.thumbnail = `${environment.apiBaseUrl}/products/images/${order_detail.product.thumbnail}`;
+          order_detail.product.thumbnail = `${environment.minioUrl}/${order_detail.product.thumbnail}`
           order_detail.number_of_products = order_detail.numberOfProducts
           //order_detail.total_money = order_detail.totalMoney
           return order_detail;
-        });        
+        });  
+
         this.orderResponse.payment_method = response.payment_method;
         if (response.shipping_date) {
           this.orderResponse.shipping_date = new Date(
@@ -92,7 +92,8 @@ export class DetailOrderAdminComponent implements OnInit{
             response.shipping_date[1] - 1,
             response.shipping_date[2]
           );
-        }         
+        }   
+              
         this.orderResponse.shipping_method = response.shipping_method;        
         this.orderResponse.status = response.status;     
            

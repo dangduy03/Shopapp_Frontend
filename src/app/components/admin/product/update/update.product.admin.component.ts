@@ -53,21 +53,23 @@ export class UpdateProductAdminComponent implements OnInit {
     });
     this.getCategories(1, 100);
   }
+  
   getCategories(page: number, limit: number) {
     this.categoryService.getCategories(page, limit).subscribe({
       next: (apiResponse: ApiResponse) => {
-        debugger;
+        ;
         this.categories = apiResponse.data;
       },
       complete: () => {
-        debugger;
+        ;
       },
       error: (error: HttpErrorResponse) => {
-        debugger;
+        ;
         console.error(error?.error?.message ?? '');
       } 
     });
   }
+
   getProductDetails(): void {
     this.productService.getDetailProduct(this.productId).subscribe({
       next: (apiResponse: ApiResponse) => {
@@ -75,18 +77,21 @@ export class UpdateProductAdminComponent implements OnInit {
         this.product = apiResponse.data;
         this.updatedProduct = { ...apiResponse.data };                
         this.updatedProduct.product_images.forEach((product_image:ProductImage) => {
-          product_image.image_url = `${environment.apiBaseUrl}/products/images/${product_image.image_url}`;
+          // product_image.image_url = `${environment.apiBaseUrl}/products/images/${product_image.image_url}`;
+          product_image.image_url = `${environment.minioUrl}/${product_image.image_url}`;
+
         });
       },
       complete: () => {
         
       },
       error: (error: HttpErrorResponse) => {
-        debugger;
+        ;
         console.error(error?.error?.message ?? '');
       } 
     });     
   }
+
   updateProduct() {
     // Implement your update logic here
     const updateProductDTO: UpdateProductDTO = {
@@ -97,20 +102,21 @@ export class UpdateProductAdminComponent implements OnInit {
     };
     this.productService.updateProduct(this.product.id, updateProductDTO).subscribe({
       next: (apiResponse: ApiResponse) => {  
-        debugger        
+                
       },
       complete: () => {
-        debugger;
+        ;
         this.router.navigate(['/admin/products']);        
       },
       error: (error: HttpErrorResponse) => {
-        debugger;
+        ;
         console.error(error?.error?.message ?? '');
       } 
     });  
   }
+   
   showImage(index: number): void {
-    debugger
+    
     if (this.product && this.product.product_images && 
         this.product.product_images.length > 0) {
       // Đảm bảo index nằm trong khoảng hợp lệ        
@@ -123,20 +129,23 @@ export class UpdateProductAdminComponent implements OnInit {
       this.currentImageIndex = index;
     }
   }
+
   thumbnailClick(index: number) {
-    debugger
+    
     // Gọi khi một thumbnail được bấm
     this.currentImageIndex = index; // Cập nhật currentImageIndex
   }  
+
   nextImage(): void {
-    debugger
+    
     this.showImage(this.currentImageIndex + 1);
   }
 
   previousImage(): void {
-    debugger
+    
     this.showImage(this.currentImageIndex - 1);
-  }  
+  } 
+
   onFileChange(event: any) {
     // Retrieve selected files from input element
     const files = event.target.files;
@@ -149,7 +158,7 @@ export class UpdateProductAdminComponent implements OnInit {
     this.images = files;
     this.productService.uploadImages(this.productId, this.images).subscribe({
       next: (apiResponse: ApiResponse) => {
-        debugger
+        
         // Handle the uploaded images response if needed              
         console.log('Images uploaded successfully:', apiResponse);
         this.images = [];       
@@ -157,11 +166,12 @@ export class UpdateProductAdminComponent implements OnInit {
         this.getProductDetails(); 
       },
       error: (error: HttpErrorResponse) => {
-        debugger;
+        ;
         console.error(error?.error?.message ?? '');
       } 
     })
   }
+  
   deleteImage(productImage: ProductImage) {
     if (confirm('Are you sure you want to remove this image?')) {
       // Call the removeImage() method to remove the image   
@@ -170,7 +180,7 @@ export class UpdateProductAdminComponent implements OnInit {
           location.reload();          
         },        
         error: (error: HttpErrorResponse) => {
-          debugger;
+          ;
           console.error(error?.error?.message ?? '');
         } 
       });

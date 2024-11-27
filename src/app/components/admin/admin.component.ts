@@ -20,11 +20,9 @@ import { TokenService } from '../../service/token.service';
   imports: [       
     CommonModule,    
     RouterModule,
-    //FormsModule
-  ],
-  
-  
+  ],  
 })
+
 export class AdminComponent implements OnInit {
   //adminComponent: string = 'orders';
   userResponse?:UserResponse | null;
@@ -40,12 +38,14 @@ export class AdminComponent implements OnInit {
       this.router.navigate(['/admin/orders']);
     }
    }  
+
   logout() {
     this.userService.removeUserFromLocalStorage();
     this.tokenService.removeToken();
     this.userResponse = this.userService.getUserResponseFromLocalStorage();    
     this.router.navigate(['/']);
   }
+
   showAdminComponent(componentName: string): void {
     
     if (componentName === 'orders') {
