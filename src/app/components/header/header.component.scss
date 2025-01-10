@@ -2,8 +2,8 @@
 
 header {
     background-color: rgba(0, 0, 0, 0);
-    color: rgb(173, 178, 203);
-    position: fixed;
+    color: $shopapp-title-color;
+    // position: fixed;
 }
 
 .navbar {
@@ -15,22 +15,22 @@ header {
 }
 
 .navbar .container .navbar-brand {
-    color: rgb(173, 178, 203);
+    color: $shopapp-title-color;
 }
 
 .navbar .container .navbar-nav .nav-link {
-    color: rgb(173, 178, 203);
+    color: $shopapp-title-color;
     border-radius: 18px;
     padding: 8px 16px;
 }
 
 .navbar .container .navbar-nav .nav-link.active {
     background-color: $shopapp-color !important;
-    color: white !important;
+    color: $shopapp-background-color !important;
 }
 .nav-item.active {
     background-color: $shopapp-color !important;
-    color: white !important;
+    color: $shopapp-background-color !important;
 }
 
 /* Add this CSS to your project's stylesheet */
@@ -45,10 +45,84 @@ header {
     display: block;
     margin-bottom: 5px;
     text-decoration: none;
-    color: #333;
+    color: $shopapp-title-color;
 }
 
 .popover-item:hover {
-    background-color: #f0f0f0;
+    background-color: $shopapp-title-color;
     color: $shopapp-color;    
+}
+
+
+
+p {
+    margin: 0;
+    color: #B3B3B3;
+}
+ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    color: #B3B3B3;
+}
+
+strong {
+    color: #000;
+}
+
+.top-bar-container {
+    background-color: #333333;
+}
+
+.border-start {
+    border-width: 1px;
+    height: 65%;
+    border-color: #B3B3B3;
+
+}
+
+.divider-line{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.main-items-container {
+    width: 33.3%;
+}
+
+.nav-list-container li{
+    color: #666666;
+}
+
+.breadcrumb-container {
+    background-image: url('../../../assets/images/Breadcrumbs.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: center;
+}
+
+ol {
+    margin: 0;
+}
+
+.link-click {
+    color: #B3B3B3;
+    text-decoration: none;
+}
+
+.link-click:hover{
+    color: #00b207 !important;
+    transition: all 0.5s ease;
+}
+
+.social-texts a {
+    text-decoration: none; /* Loại bỏ gạch chân */
+    color: #000000; /* Sử dụng màu kế thừa, hoặc đặt màu tùy chỉnh */
+    transition: color 0.3s ease; /* Thêm hiệu ứng mượt khi hover */
 }
