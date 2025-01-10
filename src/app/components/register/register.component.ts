@@ -6,12 +6,16 @@ import { UserService } from '../../service/user.service';
 import { RegisterDTO } from '../../dtos/user/register.dto';
 import { ApiResponse } from '../../reponses/api.response';
 import { HttpErrorResponse } from '@angular/common/http';
+import { HeaderComponent } from '../header/header.component';
+import { FooterComponent } from '../footer/footer.component';
 
 
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [
+    HeaderComponent,
+    FooterComponent,
     FormsModule,
     CommonModule
     ],

@@ -20,6 +20,7 @@ import { ApiResponse } from '../../reponses/api.response';
   standalone: true,
   imports: [
     HeaderComponent,
+    FooterComponent,
     FormsModule,
     CommonModule,
   ],

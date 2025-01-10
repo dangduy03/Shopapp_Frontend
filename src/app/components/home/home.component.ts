@@ -3,7 +3,6 @@ import { Product } from '../../models/product';
 import { Category } from '../../models/category';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
-
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
 import { CommonModule, DOCUMENT } from '@angular/common';
@@ -99,63 +98,7 @@ export class HomeComponent implements OnInit {
       });    
     }
 
-  //   getProducts(keyword: string, selectedCategoryId: number, page: number, limit: number) {
-  //     this.productService.getProducts(keyword, selectedCategoryId, page, limit).subscribe({
-  //       next: (apiresponse: ApiResponse) => {
-  //         console.log(apiresponse);  // Kiểm tra toàn bộ phản hồi từ API
-  //         const response = apiresponse?.data;
-   
-  //         // Kiểm tra nếu response và products không undefined
-  //         if (response && response.products) {
-  //           response.products.forEach((product: Product) => {          
-  //             product.url = `${environment.minioUrl}/${product.thumbnail}`;
-  //           });
-  //           this.products = response.products;
-  //           this.totalPages = response.totalPages;
-  //           this.visiblePages = this.generateVisiblePageArray(this.currentPage, this.totalPages);
-  //         } else {
-  //           console.error('API không trả về data hoặc products');
-  //           // console.log(apiresponse);  // In ra phản hồi API để kiểm tra
-  //         }
-  //       },
-  //       complete: () => {},
-  //       error: (error: HttpErrorResponse) => {
-  //         console.error('Lỗi xảy ra khi gọi API:', error?.error?.message ?? error.message);
-  //       }
-  //     });
-  //  }
-
-  // getProducts(keyword: string, selectedCategoryId: number, page: number, limit: number) {
-  //   this.productService.getProducts(keyword, selectedCategoryId, page, limit).subscribe({
-  //     next: (apiresponse: ApiResponse) => {
-  //       const response = apiresponse?.data;
-    
-  //       if (response && response.products && Array.isArray(response.products)) {
-  //         response.products.forEach((product: Product) => {
-  //           product.url = `${environment.minioUrl}/${product.thumbnail}`;
-  //         });
-  //         this.products = response.products;
-  //         this.totalPages = response.totalPages;
-  //         this.visiblePages = this.generateVisiblePageArray(this.currentPage, this.totalPages);
-  //       } else {
-  //         // Xử lý khi không có products
-  //         console.warn('No products found in the response.');
-  //         this.products = []; // Gán giá trị mặc định để tránh lỗi
-  //         this.totalPages = 0;
-  //       }
-  //     },
-  //     error: (error: HttpErrorResponse) => {
-  //       console.error('Error fetching products:', error?.message ?? '');
-  //       // Xử lý lỗi khi không thể kết nối API hoặc API gặp lỗi
-  //     }
-  //   });
-    
-  // }
-  
-   
-    
-    onPageChange(page: number) {
-      
+    onPageChange(page: number) { 
       this.currentPage = page < 0 ? 0 : page;
       this.localStorage?.setItem('currentProductPage', String(this.currentPage)); 
       this.getProducts(this.keyword, this.selectedCategoryId, this.currentPage, this.itemsPerPage);

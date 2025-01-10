@@ -1,3 +1,246 @@
-.footer-description {
-    color: rgb(173, 178, 203);
+.footer {
+    background-color: rgb(0, 0, 0);
+}
+
+.text-body-secondary {
+    --bs-text-opacity: 1;
+    color: rgb(255 255 255 / 75%) !important;
+}
+
+.h5,
+i {
+    font-size: 1.25rem;
+    color: white;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: rgb(183, 183, 183);
+}
+
+.social-icons {
+    display: flex;
+    justify-content: flex-start;
+    gap: 16px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    align-items: flex-start;
+
+    flex: 0;
+}
+
+.social-icons a {
+    text-decoration: none;
+    color: #7d7d7d;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #ffffff;
+}
+
+.social-texts a {
+    text-decoration: none;
+    color: #fff;
+    transition: color 0.3s ease;
+}
+
+.social-texts .nav-link {
+    text-decoration: none;
+    color: #ffffff;
+    transition: color 0.3s ease;
+
+}
+
+.social-texts .nav-link:hover {
+    color: #ffffff;
+    font-weight: bold;
+
+}
+
+.social-texts .nav-link:active {
+    color: #ffffff;
+
+}
+
+
+.newsletter-section {
+    background-color: #e6f8f5;
+    padding: 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #2d2d2d;
+}
+
+.logo i {
+    color: #4caf50;
+    margin-right: 8px;
+}
+
+.newsletter-content {
+    flex: 1;
+    margin-left: 20px;
+    text-align: left;
+}
+
+.newsletter-content h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #2d2d2d;
+}
+
+.newsletter-content p {
+    margin: 5px 0 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.newsletter-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.newsletter-form input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    font-size: 14px;
+}
+
+.newsletter-form button {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.newsletter-form button:hover {
+    background-color: #43a047;
+}
+
+
+footer h6 {
+    font-size: 1rem;
+}
+
+footer p,
+footer ul {
+    font-size: 0.875rem;
+}
+
+footer ul {
+    padding: 0;
+    list-style: none;
+}
+
+footer ul li {
+    margin-bottom: 0.5rem;
+}
+
+.newsletter-section {
+    background-color: #f8f9fa;
+    padding: 30px 0;
+
+}
+
+.newsletter-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+}
+
+.newsletter-button:hover {
+    background-color: #218838;
+}
+
+.payment-logos i {
+    font-size: 50px; 
+    margin-right: 10px;
+    color: #ffffff;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.visa-logo {
+    background: none;
+    color: #ffffff; 
+}
+.visa-logo:hover {
+    color: #254EDD; 
+    transform: scale(1.2);
+    filter: brightness(1.2);
+}
+
+.mastercard-logo {
+    background: none;
+    color: #ffffff; 
+}
+.mastercard-logo:hover {
+    transform: scale(1.2);
+    filter: brightness(1.3);
+}
+
+.paypal-logo {
+    background: none;
+    color: #ffffff; 
+}
+.paypal-logo:hover {
+    color: #009CDE; 
+    transform: scale(1.2);
+    filter: brightness(1.2);
+}
+
+.applepay-logo {
+    background: none;
+    color: #ffffff; 
+}
+.applepay-logo:hover {
+    color: #555555; 
+    transform: scale(1.2);
+    filter: brightness(1.1);
+}
+
+.payment-logos i:hover {
+    animation: pulse 0.5s ease-in-out;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.d-flex li a img {
+    transition: transform 0.3s ease-in-out;
+}
+
+.d-flex li a:hover img {
+    transform: scale(1.1);
+}
+
+.d-flex {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0; 
+}
+
+.d-flex li {
+    margin: 0 10px;
 }

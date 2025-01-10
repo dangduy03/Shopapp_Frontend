@@ -1,75 +1,182 @@
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="50" height="50">
-                    <circle cx="50" cy="50" r="45" fill="rgb(240, 101, 197)"/>
-                    <circle cx="50" cy="50" r="35" fill="rgb(127, 68, 255)"/>
-                </svg>
+
+  <!-- Top Bar -->
+  <div class="top-bar-container d-flex justify-content-between align-items-center w-100 px-5">
+    <div class="d-flex flex-row justify-content-center align-items-center">
+      <img class="m-1" src="../../../assets/svg/svg_map_pin.svg" alt="logo shopapp" />
+      <p class="m-1">Địa Chỉ : 35 Thanh Hóa, Phường Hòa Xuân, Quận Cẩm Lệ, Thành Phố Đà Nẵng</p>
+    </div>
+    <div class="d-flex flex-row justify-content-center align-items-center">
+      <ul>
+        <li class="divider-line">
+          <div class="border-start mx-2"></div>
+        </li>
+        <li class="m-2">
+          <a class="link-click" [routerLink]="['/login']">Login</a> /
+          <a class="link-click" [routerLink]="['/register']">Register</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Middle bar -->
+  <div class="d-flex justify-content-between align-items-center my-3 px-5">
+    <div class="d-flex justify-content-center">
+      <a class="nav-link" [ngClass]="{ 'active': activeNavItem === 0 }" (click)="setActiveNavItem(0)" routerLink="/">
+        <img src="../../../assets/logo/Logo.png" alt="logo shopapp">
+      </a>
+    </div>
+
+    <div class="input-group main-items-container">
+
+      <span class="input-group-text" id="button-addon2">
+        <img src="../../../assets/svg/svg_search.svg" alt="search" style="width: 16px; height: 16px;">
+      </span>
+      <input type="text" class="form-control search-input" placeholder="Search" [(ngModel)]="keyword"
+        aria-label="Search" aria-describedby="button-addon2">
+
+      <!-- <select class="form-control product-category" [(ngModel)]="selectedCategoryId">
+        <option [value]="0">Tất cả</option>
+        @for(category of categories; track category.name) {
+        <option [value]="category.id">
+          {{ category.name }}
+        </option>
+        }
+      </select> -->
+
+      <button class="btn btn-outline-secondary" (click)="searchProducts()" type="button"
+        id="button-addon2">Search</button>
+    </div>
+    <div>
+      <ul class="d-flex justify-content-center">
+        <li class="d-flex align-items-center m-2">
+          <a class="nav-link" [ngClass]="{ 'active': activeNavItem === 4 }" (click)="setActiveNavItem(4)"
+            routerLink="/user-profile">
+            <img src="../../../assets/svg/svg_person.svg" alt="person" />
+          </a>
+        </li>
+        <li class="divider-line">
+          <div class="border-start mx-2"></div>
+        </li>
+        <li class="d-flex align-items-center m-2">
+          <img src="../../../assets/svg/svg_heart_white.svg" alt="favorite" />
+        </li>
+        <li class="divider-line">
+          <div class="border-start mx-2"></div>
+        </li>
+        <li class="d-flex justify-content-center">
+          <div class="d-flex align-items-center">
+            <a class="nav-link" [ngClass]="{ 'active': activeNavItem === 2 }" (click)="setActiveNavItem(2)"
+              routerLink="/orders">
+              <img class="m-2" src="../../../assets/svg/svg_cart.svg" alt="cart" />
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" 
-                          [ngClass]="{ 'active': activeNavItem === 0 }"
-                          (click)="setActiveNavItem(0)"
-                          routerLink="/">Trang chủ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" 
-                          [ngClass]="{ 'active': activeNavItem === 1 }"
-                          (click)="setActiveNavItem(1)"
-                          routerLink="/">Thông báo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" 
-                            [ngClass]="{ 'active': activeNavItem === 2 }"
-                            (click)="setActiveNavItem(2)"
-                            routerLink="/orders">
-                            <i class="fas fa-shopping-cart icon"></i>
-                            Giỏ hàng
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        @if(userResponse) {
-                          <ng-container>
-                            <ng-container
-                              ngbPopover="Tài khoản của tôi,Đơn mua,Đăng xuất"
-                              popoverTitle="User Actions"
-                              triggers="click"
-                              [placement]="'bottom'"
-                            >
-                              <a
-                                class="nav-link"                              
-                                [ngbPopover]="popoverContent"
-                                (click)="togglePopover($event)"
-                              >
-                                {{ userResponse.fullname }}
-                              </a>
-                              <ng-template #popoverContent>
-                                <div class="popover-list">
-                                  <a class="popover-item" 
-                                      (click)="handleItemClick(0)">Tài khoản của tôi</a>
-                                  <a class="popover-item" 
-                                      (click)="handleItemClick(1)">Đơn mua</a>
-                                  <a class="popover-item" 
-                                      (click)="handleItemClick(2)">Đăng xuất</a>
-                                </div>
-                              </ng-template>
-                            </ng-container>
-                          </ng-container>
-                        } @else {
-                          <ng-container>
-                            <a class="nav-link" routerLink="/login">Đăng nhập</a>
-                          </ng-container>
-                        }                                                
-                      </li>                                                                
-                </ul>
+            <div style="display: none;">
+              <p>2</p> <!-- Number of cart -->
             </div>
-        </div>
+          </div>
+          <div style="color: black;" class="m-2">
+            <p style="color: black;">Shopping cart:</p>
+            <strong>$57.00</strong>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="d-flex flex-row justify-content-between align-items-center px-5 py-3 border-top">
+    <div class="d-flex flex-row justify-content-center align-items-center">
+      <ul class="nav-list-container">
+        <li class="m-2 ms-0 px-2">
+          <a class="nav-link" [ngClass]="{ 'active': activeNavItem === 0 }" (click)="setActiveNavItem(0)"
+            routerLink="/">Trang chủ
+          </a>
+        </li>
+        <li class="m-2 px-2">Shop</li>
+        <li class="m-2 px-2">Page</li>
+        <li class="m-2 px-2">About us</li>
+        <li class="m-2 px-2">Contact us</li>
+      </ul>
+    </div>
+
+    <div class="d-flex flex-row justify-content-center align-items-center social-texts">
+      <ul class="nav-list-container">
+        <li class="d-flex align-items-center m-2">
+          <img src="../../../assets/svg/svg_phone_call.svg" alt="phone">
+        </li>
+        <li class="align-self-center">
+          <strong><a href="tel:(984)616-375">(984)616-375</a></strong>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+
+  <div class="py-5 px-5 breadcrumb-container d-flex align-items-center">
+    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a class="nav-link" [ngClass]="{ 'active': activeNavItem === 4 }" (click)="setActiveNavItem(5)" routerLink="">
+            <img src="../../../assets/svg/svg_home.svg" alt="home">
+          </a>
+        </li>
+        <li class="breadcrumb-item">Account</li>
+        <li class="breadcrumb-item" aria-current="page">Login</li>
+      </ol>
     </nav>
+  </div>
+
+  <div class="header">
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" [ngClass]="{ 'active': activeNavItem === 0 }" (click)="setActiveNavItem(0)"
+                routerLink="/">Trang chủ</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [ngClass]="{ 'active': activeNavItem === 1 }" (click)="setActiveNavItem(1)"
+                routerLink="/">Thông báo</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [ngClass]="{ 'active': activeNavItem === 2 }" (click)="setActiveNavItem(2)"
+                routerLink="/orders">
+                <i class="fas fa-shopping-cart icon"></i>
+                Giỏ hàng
+              </a>
+            </li>
+            <li class="nav-item">
+              @if(userResponse) {
+              <ng-container>
+                <ng-container ngbPopover="Tài khoản của tôi,Đơn mua,Đăng xuất" popoverTitle="User Actions"
+                  triggers="click" [placement]="'bottom'">
+                  <a class="nav-link" [ngbPopover]="popoverContent" (click)="togglePopover($event)">
+                    {{ userResponse.fullname }}
+                  </a>
+                  <ng-template #popoverContent>
+                    <div class="popover-list">
+                      <a class="popover-item" (click)="handleItemClick(0)">Tài khoản của tôi</a>
+                      <a class="popover-item" (click)="handleItemClick(1)">Đơn mua</a>
+                      <a class="popover-item" (click)="handleItemClick(2)">Đăng xuất</a>
+                    </div>
+                  </ng-template>
+                </ng-container>
+              </ng-container>
+              } @else {
+              <ng-container>
+                <a class="nav-link" routerLink="/login">Đăng nhập</a>
+              </ng-container>
+              }
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
 </header>

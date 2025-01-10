@@ -1,8 +1,14 @@
 @import '../../styles/shared-styles.scss';
 
+.container {
+    color: $shopapp-title-color;
+    min-height: calc(100vh - 140px); /* Trừ chiều cao của header và footer */
+    padding: 100px;
+}
+
 .intro-section {
     text-align: center;
-    color: white;
+    color: $shopapp-title-color;
     padding: 20px;
 }
 
@@ -15,41 +21,45 @@
 
 .product-category {
     width: 200px;
+    background-color: $shopapp-background-color;
+    margin-right: 10px;
+    border-color: rgba(0, 0, 0, 0.5);
+    color: $shopapp-title-color;
 }
 
 .search-input {
     width: 300px;
     background-color: $shopapp-background-color;
     margin-right: 10px;
-    border-color: rgba(255, 255, 255, 0.5);
-    color: white;
+    border-color: rgba(0, 0, 0, 0.5);
+    color: $shopapp-title-color;
 }
 
 .form-control {
     background-color: transparent;
-    color: white;
+    color: $shopapp-title-color;
 }
 
 .form-control::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(0, 0, 0, 0.5);
     opacity: 1;
     /* Firefox */
 }
 
 .form-control:-ms-input-placeholder {
     /* Internet Explorer 10-11 */
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .form-control::-ms-input-placeholder {
     /* Microsoft Edge */
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .product-item {
     background-color: $shopapp-background-color;
-    border: 1px solid rgb(35, 39, 61);
+    border: 1px solid $shopapp-title-color;
     border-radius: 20px;
     padding: 20px;
     margin-bottom: 20px;
@@ -62,11 +72,11 @@
 }
 
 .product-name {
-    color: white;
+    color: $shopapp-title-color;
 }
 
 .product-description {
-    color: rgb(173, 178, 203);
+    color: $shopapp-title-color;
 }
 
 .product-warranty {
@@ -74,7 +84,7 @@
 }
 
 .product-price {
-    color: white;
+    color: $shopapp-title-color;
 }
 
 .product-rating {
@@ -96,14 +106,14 @@
 .page-number {
     cursor: pointer;
     padding: 5px 10px;
-    border: 1px solid #ccc;
+    border: 1px solid $shopapp-title-color;
     margin: 0 2px;
     border-radius: 3px;
 }
 
 .page-number.active {
     background-color: $shopapp-color !important;
-    color: #fff;
+    color: $shopapp-title-color;
     border-color: $shopapp-color !important;
 }
 
