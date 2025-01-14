@@ -1,9 +1,5 @@
-// $shopapp-color: rgb(127, 68, 255);    
-// $shopapp-tint-color: rgb(233, 66, 178);
-// $shopapp-title-color: rgb(105, 244, 181);
-// $shopapp-background-color: rgb(19, 23, 42);
+@import './color.scss';
 
-$shopapp-color: #00B207;    
-$shopapp-tint-color: rgb(105, 244, 181);
-$shopapp-title-color: #000000;
-$shopapp-background-color: rgb(255, 255, 255);
+.background-color-success {
+    background-color: $shopapp-color;
+}

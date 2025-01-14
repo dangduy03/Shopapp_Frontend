@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
+    "watch": "ng build --watch --configuration=development",
     "test": "ng test",
     "serve:ssr:shopaap_frontend": "node dist/shopaap_frontend/server/server.mjs"
   },
@@ -31,6 +31,8 @@
     "class-validator": "^0.14.1",
     "express": "^4.18.2",
     "font-awesome": "^4.7.0",
+    "jquery": "^3.7.1",
+    "popper.js": "^1.16.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
