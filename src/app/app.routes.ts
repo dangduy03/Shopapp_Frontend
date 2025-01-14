@@ -9,6 +9,7 @@ import { UserProfileComponent } from './components/user-profile/user.profile.com
 import { AuthGuardFn } from './guards/auth.guard';
 import { AdminGuardFn } from './guards/admin.guard';
 import { AdminComponent } from './components/admin/admin.component';
+import { ErosComponent } from './components/eros/eros.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,6 +19,8 @@ export const routes: Routes = [
   { path: 'orders', component: OrderComponent,canActivate:[AuthGuardFn] },
   { path: 'user-profile', component: UserProfileComponent, canActivate:[AuthGuardFn] },
   { path: 'orders/:id', component: OrderDetailComponent },
+  { path: 'eros', component: ErosComponent },
+
   //Admin   
   { 
     path: 'admin', 
