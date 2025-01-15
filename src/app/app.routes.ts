@@ -9,22 +9,21 @@ import { UserProfileComponent } from './components/user-profile/user.profile.com
 import { AuthGuardFn } from './guards/auth.guard';
 import { AdminGuardFn } from './guards/admin.guard';
 import { AdminComponent } from './components/admin/admin.component';
-import { ErosComponent } from './components/eros/eros.component';
+import { NotFoundComponent } from './erros/not-found/not-found.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },  
+  { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'products/:id', component: DetailProductComponent },  
-  { path: 'orders', component: OrderComponent,canActivate:[AuthGuardFn] },
-  { path: 'user-profile', component: UserProfileComponent, canActivate:[AuthGuardFn] },
+  { path: 'products/:id', component: DetailProductComponent },
+  { path: 'orders', component: OrderComponent, canActivate: [AuthGuardFn] },
+  { path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuardFn] },
   { path: 'orders/:id', component: OrderDetailComponent },
-  { path: 'eros', component: ErosComponent },
+  { path: 'not-found', component: NotFoundComponent },
 
-  //Admin   
-  { 
-    path: 'admin', 
-    component: AdminComponent, 
-    canActivate:[AdminGuardFn] 
-  },      
+  {
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [AdminGuardFn]
+  },
 ];
