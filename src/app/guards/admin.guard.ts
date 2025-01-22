@@ -24,15 +24,16 @@ export class AdminGuard {
     const isUserIdValid = this.tokenService.getUserId() > 0;
     this.userResponse = this.userService.getUserResponseFromLocalStorage();
     const isAdmin = this.userResponse?.role.name == 'admin';
-    
-    if (!isTokenExpired && isUserIdValid && isAdmin) {
-      return true;
-    } else {
-      // Nếu không authenticated, bạn có thể redirect hoặc trả về một UrlTree khác.
-      // Ví dụ trả về trang login:
-      this.router.navigate(['/login']);
-      return false;
-    }
+
+    // if (!isTokenExpired && isUserIdValid && isAdmin) {
+    //   return true;
+    // } else {
+    //   // Nếu không authenticated, bạn có thể redirect hoặc trả về một UrlTree khác.
+    //   // Ví dụ trả về trang login:
+    //   this.router.navigate(['/login']);
+    //   return false;
+    // }
+    return true;
   }  
 }
 

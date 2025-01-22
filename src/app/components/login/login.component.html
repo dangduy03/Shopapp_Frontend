@@ -1,16 +1,20 @@
 <div class="container-xxl d-flex justify-content-center my-5 py-5">
     <div class="card shadow rounded col-5 py-3">
-        <div class="card-body">
-            <h1 class="ps-5 pe-5 col-sm-12 text-center">Sign in</h1>
-            <div class="container">
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleFormControlInput2" placeholder="Password">
-                </div>
+        <form #loginForm="ngForm">
+            <div class="card-body">
+                <h1 class="ps-5 pe-5 col-sm-12 text-center">Sign in</h1>
+                <div class="container">
+                    <div class="mb-3">
+                        <label for="emailOrPhoneNumberInput" class="form-label">Email or Phone Number</label>
+                        <input type="email" class="form-control" id="emailOrPhoneNumberInput" name="emailOrPhoneNumber"
+                            [(ngModel)]="emailOrPhoneNumber" placeholder="Email or Phone Number">
+                        </div>
+
+                    <div class="mb-3">
+                        <label for="passwordInput" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="passwordInput" name="password" [(ngModel)]="password"
+                            placeholder="Password">
+                        </div>
                 </div>
                 <div class="container">
                     <div class="row mb-3">
@@ -20,23 +24,24 @@
                                 <label class="form-check-label" for="flexCheckDefault">
                                     Remember me
                                 </label>
-                        </div>
-                    </div>
-                    <div class="col-6 text-end">
-                        <a class="text-decoration-none" style="color: #212529;" href="#">
-                            Forget password
-                        </a>
-                    </div>
+                            </div>
+                            </div>
+                            <div class="col-6 text-end">
+                                <a class="text-decoration-none" style="color: #212529;" href="#">
+                                    Forget password
+                                </a>
+                            </div>
+                            </div>
                 </div>
-                </div>
-            <div class="container mb-3">
-                <div class="d-grid"><button class="btn btn-success" type="button">Login</button></div>
-            </div>
-            <div class="container d-flex justify-content-center">
-                <p class="mb-0">Don't have account? <a class="text-decoration-none fw-bold" style=" color: #212529;"
-                        routerLink="/register">Register</a>
-                </p>
-            </div>
-        </div>
+                <div class="container mb-3">
+                    <div class="d-grid"><button class="btn btn-success" (click)="onSubmit()">Login</button></div>
+                    </div>
+                    <div class="container d-flex justify-content-center">
+                        <p class="mb-0">Don't have account? <a class="text-decoration-none fw-bold" style=" color: #212529;"
+                                routerLink="/register">Register</a>
+                        </p>
+                    </div>
+                    </div>
+        </form>
     </div>
 </div>
