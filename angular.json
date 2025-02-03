@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "shopaap_frontend": {
+    "shopery-frontend": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/shopaap_frontend",
+            "outputPath": "dist/shopery-frontend",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -30,14 +30,10 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.css",
-              "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
+              "node_modules/bootstrap/scss/bootstrap.scss",
+              "src/styles.scss"
             ],
-            "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.js"
-            ],
+            "scripts": [],
             "server": "src/main.server.ts",
             "prerender": true,
             "ssr": {
@@ -72,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "shopaap_frontend:build:production"
+              "buildTarget": "shopery-frontend:build:production"
             },
             "development": {
-              "buildTarget": "shopaap_frontend:build:development"
+              "buildTarget": "shopery-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "shopaap_frontend:build"
+            "buildTarget": "shopery-frontend:build"
           }
         },
         "test": {
@@ -101,8 +97,7 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
+              "node_modules/bootstrap/scss/bootstrap.scss"
             ],
             "scripts": []
           }
@@ -111,6 +106,6 @@
     }
   },
   "cli": {
-    "analytics": "a0e0bb27-d58a-4be8-a1f8-584eea1ea603"
+    "analytics": false
   }
 }
