@@ -1,8 +1,8 @@
 import { Component, isDevMode } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from '../components/header/header.component';
-import { FooterComponent } from '../components/footer/footer.component';
 import { ToastComponent } from '../utils/components/toast/toast.component';
+import { HeaderComponent } from '../pages/header/header.component';
+import { FooterComponent } from '../pages/footer/footer.component';
 
 @Component({
   selector: 'app-root',
