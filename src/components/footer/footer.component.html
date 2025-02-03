@@ -1,0 +1,133 @@
+<footer class="newsletter-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-4 newsletter-logo d-flex align-items-center">
+                <a class="nav-link" [ngClass]="{ 'active': activeNavItem === 0 }" (click)="setActiveNavItem(0)"
+                    routerLink="/">
+                    <img src="../../../assets/logo/Logo.png" alt="logo shopapp">
+                </a>
+            </div>
+            <div class="col-md-8 d-flex align-items-center justify-content-between">
+                <div>
+                    <h5>Subscribe our Newsletter</h5>
+                    <p class="mb-0">Pellentesque eu nibh eget mauris congue mattis matt.</p>
+                </div>
+                <form class="d-flex">
+                    <input type="email" class="form-control me-2" placeholder="Your email address">
+                    <button type="submit" class="btn newsletter-button">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<footer class="bg-dark text-light pt-5 pb-4">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-5 mb-3 social-texts">
+                <h6 class="fw-bold">About Shopery</h6>
+                <p class="small">Morbi cursus porttitor enim lobortis molestie.
+                    Duis gravida turpis dui, eget bibendum magna congue nec.</p>
+                <p>
+                    <a href="tel:(984)616-375"><i class="nav-link fas fa-phone me-2"></i>(984)616-375</a> Or
+                    <a href="mailto:dangduynguyen03@gmail.com"><i class="fas fa-envelope me-2"></i>{{
+                        'dangduynguyen@gmail.com' }}</a>
+                </p>
+            </div>
+
+            <div class="col-6 col-md-2 mb-3 social-texts">
+                <h5>Tài Khoản</h5>
+                <ul class="nav flex-column ">
+                    <li class="nav-item mb-2">
+                        <a href="#" class="nav-link p-0 text-body-secondary">Tài Khoản</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="#" class="nav-link p-0 text-body-secondary">Lịch Sử Đơn Hàng</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="#" class="nav-link p-0 text-body-secondary">Giỏ Hàng</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="#" class="nav-link p-0 text-body-secondary">Danh Sách Yêu Thích</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="#" class="nav-link p-0 text-body-secondary">Cài Đặt</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-6 col-md-2 mb-3 social-texts">
+                <h5>Helps</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2">
+                        <a href="#" class="nav-link p-0 text-body-secondary">Contact</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="#" class="nav-link p-0 text-body-secondary">Faqs</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="#" class="nav-link p-0 text-body-secondary">Terms & Conditon</a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a href="#" class="nav-link p-0 text-body-secondary">Privacy Policy</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-md-2 mb-4">
+                <h6 class="fw-bold">Download our Mobile App</h6>
+                <ul class="d-flex justify-content-center">
+                    <li>
+                        <a href="https://apps.apple.com/">
+                            <img src="../../../assets/svg/svg_app_store.svg" alt="App Store" />
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://play.google.com/">
+                            <img src="../../../assets/svg/svg_google_play.svg" alt="Google Play" />
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center py-4 my-4 border-top">
+            <!-- Phần mạng xã hội -->
+            <ul class="list-unstyled d-flex social-icons mb-2 mb-sm-0">
+                <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+                    rel="stylesheet" />
+                <li class="me-3">
+                    <a href="https://www.instagram.com" target="_blank" class="fa-brands fa-instagram"
+                        style="font-size: 24px;"></a>
+                </li>
+                <li class="me-3">
+                    <a href="https://web.facebook.com/" target="_blank" class="fa-brands fa-facebook"
+                        style="font-size: 24px;"></a>
+                </li>
+                <li>
+                    <a href="https://www.twitter.com" target="_blank" class="fa-brands fa-twitter"
+                        style="font-size: 24px;"></a>
+                </li>
+            </ul>
+
+            <!-- Phần chữ cần căn giữa -->
+            <div class="text-center flex-grow-1 d-flex justify-content-center align-items-center">
+                &copy;2024 ANDY SHOPP. Chúng tôi hân hạnh được giúp đỡ ❤️
+            </div>
+
+            <!-- Phần logo thanh toán -->
+            <div class="col-md-6 text-center text-md-end payment-logos">
+                <i class="fab fa-cc-visa me-2 visa-logo"></i>
+                <i class="fab fa-cc-mastercard me-2 mastercard-logo"></i>
+                <i class="fab fa-cc-paypal me-2 paypal-logo"></i>
+                <i class="fab fa-cc-apple-pay applepay-logo"></i>
+            </div>
+
+
+        </div>
+
+
+    </div>
+</footer>

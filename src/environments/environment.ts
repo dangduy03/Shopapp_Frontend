@@ -1,6 +1,5 @@
 export const environment = {
-    // production : false,
-    production: true, 
-    apiBaseUrl: 'http://localhost:8088/api/v1',
-    minioUrl: 'http://10.147.19.99:9000'
-}
+  production: false,
+  apiBaseUrl: 'https://shopapp-backend-production.up.railway.app/api/v1',
+  minioUrl: 'https://bucket-production-03c1.up.railway.app',
+};
