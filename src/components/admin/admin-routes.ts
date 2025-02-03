@@ -1,7 +1,7 @@
 import { AdminComponent } from "./admin.component";
 import { OrderAdminComponent } from "./order/order.admin.component";
 import { DetailOrderAdminComponent } from "./detail-order/detail.order.admin.component";
-import { Route, Router,Routes } from "@angular/router";
+import { Route, Router, Routes } from "@angular/router";
 import { ProductAdminComponent } from "./product/product.admin.component";
 import { CategoryAdminComponent } from "./category/category.admin.component";
 import { UpdateProductAdminComponent } from "./product/update/update.product.admin.component";
@@ -18,7 +18,7 @@ export const adminRoutes: Routes = [
             {
                 path: 'orders',
                 component: OrderAdminComponent
-            },            
+            },
             {
                 path: 'products',
                 component: ProductAdminComponent
@@ -52,7 +52,7 @@ export const adminRoutes: Routes = [
             {
                 path: 'users',
                 component: UserAdminComponent
-            },  
+            },
         ]
     }
 ];

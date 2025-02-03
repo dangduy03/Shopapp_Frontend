@@ -88,13 +88,25 @@
       <ul class="nav-list-container">
         <li class="m-2 ms-0 px-2">
           <a class="nav-link" [ngClass]="{ 'active': activeNavItem === 0 }" (click)="setActiveNavItem(0)"
-            routerLink="/">Trang chủ
+            routerLink="/">Home
           </a>
         </li>
         <li class="m-2 px-2">Shop</li>
-        <li class="m-2 px-2">Page</li>
-        <li class="m-2 px-2">About us</li>
-        <li class="m-2 px-2">Contact us</li>
+        <li class="m-2 ms-0 px-2">
+          <a class="nav-link" [ngClass]="{ 'active': activeNavItem === 0 }" (click)="setActiveNavItem(8)"
+            routerLink="page">Page
+          </a>
+        </li>
+        <li class="m-2 ms-0 px-2">
+          <a class="nav-link" [ngClass]="{ 'active': activeNavItem === 0 }" (click)="setActiveNavItem(6)"
+            routerLink="about-us">About us
+          </a>
+        </li>
+        <li class="m-2 ms-0 px-2">
+          <a class="nav-link" [ngClass]="{ 'active': activeNavItem === 0 }" (click)="setActiveNavItem(7)"
+            routerLink="contact-us">Contact us
+          </a>
+        </li>
       </ul>
     </div>
 

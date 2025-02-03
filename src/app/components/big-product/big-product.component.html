@@ -1,0 +1,51 @@
+<div class="card product-card text-center p-3">
+    <div class="d-flex justify-content-between align-items-start mb-2">
+        <span class="badge bg-danger">Sale 50%</span>
+        <span class="badge bg-primary">Best Sale</span>
+    </div>
+
+    <img src="../../../assets/images/Ship.png" class="img-fluid rounded mb-3" alt="Product Image">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <button class="btn btn-outline-secondary btn-sm rounded-circle">
+            <img src="../../../assets/logo/Heart.png" alt="Heart logo">
+        </button>
+        <button class="btn btn-success px-4">Add to Cart</button>
+        <button class="btn btn-outline-secondary btn-sm rounded-circle">
+            <img src="../../../assets/logo/Eye.png" alt="Eye logo">
+        </button>
+    </div>
+
+    <h5 class="product-title">Chinese Cabbage</h5>
+    <p class="text-muted mb-1">
+        <strong class="text-success">$12.00</strong>
+        <del>$24.00</del>
+    </p>
+    <p class="text-warning mb-1">
+        <i class="bi bi-star-fill"></i>
+        <i class="bi bi-star-fill"></i>
+        <i class="bi bi-star-fill"></i>
+        <i class="bi bi-star-fill"></i>
+        <i class="bi bi-star-half"></i> (524 Feedback)
+    </p>
+
+    <p class="text-danger fw-bold">Hurry up! Offer ends in:</p>
+    <div class="d-flex justify-content-center">
+        <div class="text-center mx-2">
+            <h6 class="mb-0">{{ days }}</h6>
+            <small>Days</small>
+        </div>
+        <div class="text-center mx-2">
+            <h6 class="mb-0">{{ hours }}</h6>
+            <small>Hours</small>
+        </div>
+        <div class="text-center mx-2">
+            <h6 class="mb-0">{{ minutes }}</h6>
+            <small>Mins</small>
+        </div>
+        <div class="text-center mx-2">
+            <h6 class="mb-0">{{ seconds }}</h6>
+            <small>Secs</small>
+        </div>
+    </div>
+</div>

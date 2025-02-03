@@ -1,7 +1,7 @@
 import {
-    IsString, 
-    IsNotEmpty, 
-    IsPhoneNumber,     
+    IsString,
+    IsNotEmpty,
+    IsPhoneNumber,
 } from 'class-validator';
 
 export class UpdateProductDTO {
