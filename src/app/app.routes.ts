@@ -10,6 +10,9 @@ import { AuthGuardFn } from './guards/auth.guard';
 import { AdminGuardFn } from './guards/admin.guard';
 import { AdminComponent } from './components/admin/admin.component';
 import { NotFoundComponent } from './erros/not-found/not-found.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { ContactUsComponent } from './components/contact-us/contact-us.component';
+import { BigProductComponent } from './components/big-product/big-product.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,7 +22,12 @@ export const routes: Routes = [
   { path: 'orders', component: OrderComponent, canActivate: [AuthGuardFn] },
   { path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuardFn] },
   { path: 'orders/:id', component: OrderDetailComponent },
-  { path: '**', component: NotFoundComponent },
+  // { path: '**', component: NotFoundComponent },
+  { path: 'about-us', component: AboutUsComponent },
+  { path: 'contact-us', component: ContactUsComponent },
+  { path: 'page', component: BigProductComponent },
+
+
 
   {
     path: 'admin',

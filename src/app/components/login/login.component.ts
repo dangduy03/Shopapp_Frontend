@@ -3,14 +3,11 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { CommonModule, NgIf } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { HttpClientModule, HttpErrorResponse } from '@angular/common/http';
-import { FooterComponent } from '../footer/footer.component';
-import { HeaderComponent } from '../header/header.component';
 import { LoginDTO } from '../../dtos/user/login.dto';
 import { UserService } from '../../service/user.service';
 import { TokenService } from '../../service/token.service';
 import { Role } from '../../models/role';
 import { RoleService } from '../../service/role.service';
-import { LoginResponse } from '../../reponses/user/login.response';
 import { UserResponse } from '../../reponses/user/user.response';
 import { CartService } from '../../service/cart.service';
 import { ApiResponse } from '../../reponses/api.response';
@@ -19,15 +16,13 @@ import { ApiResponse } from '../../reponses/api.response';
   selector: 'app-login',
   standalone: true,
   imports: [
-    HeaderComponent,
-    FooterComponent,
     FormsModule,
     CommonModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
   @ViewChild('loginForm') loginForm!: NgForm;
 
   /*
@@ -69,35 +64,35 @@ export class LoginComponent implements OnInit{
 
   ngOnInit() {
     // Gọi API lấy danh sách roles và lưu vào biến roles
-    
-    this.roleService.getRoles().subscribe({      
+
+    this.roleService.getRoles().subscribe({
       next: (apiResponse: ApiResponse) => { // Sử dụng kiểu Role[]
-        
+
         const roles = apiResponse.data
         this.roles = roles;
         this.selectedRole = roles.length > 0 ? roles[0] : undefined;
       },
       complete: () => {
-        
-      },  
+
+      },
       error: (error: HttpErrorResponse) => {
         ;
         console.error(error?.error?.message ?? '');
-      } 
+      }
     });
   }
 
   createAccount() {
-    
+
     // Chuyển hướng người dùng đến trang đăng ký (hoặc trang tạo tài khoản)
-    this.router.navigate(['/register']); 
+    this.router.navigate(['/register']);
   }
 
   login() {
     const message = `phone: ${this.phoneNumber}` +
-                    `password: ${this.password}`;
+      `password: ${this.password}`;
     //console.error(message);
-    
+
 
     const loginDTO: LoginDTO = {
       phone_number: this.phoneNumber,
@@ -108,23 +103,23 @@ export class LoginComponent implements OnInit{
       next: (apiResponse: ApiResponse) => {
         ;
         const { token } = apiResponse.data;
-        if (this.rememberMe) {          
+        if (this.rememberMe) {
           this.tokenService.setToken(token);
           ;
           this.userService.getUserDetail(token).subscribe({
             next: (apiResponse2: ApiResponse) => {
-              
+
               this.userResponse = {
                 ...apiResponse2.data,
                 date_of_birth: new Date(apiResponse2.data.date_of_birth),
-              };    
-              this.userService.saveUserResponseToLocalStorage(this.userResponse); 
-              if(this.userResponse?.role.name == 'admin') {
-                this.router.navigate(['/admin']);    
-              } else if(this.userResponse?.role.name == 'user') {
-                this.router.navigate(['/']);                      
+              };
+              this.userService.saveUserResponseToLocalStorage(this.userResponse);
+              if (this.userResponse?.role.name == 'admin') {
+                this.router.navigate(['/admin']);
+              } else if (this.userResponse?.role.name == 'user') {
+                this.router.navigate(['/']);
               }
-              
+
             },
             complete: () => {
               this.cartService.refreshCart();
@@ -133,9 +128,9 @@ export class LoginComponent implements OnInit{
             error: (error: HttpErrorResponse) => {
               ;
               console.error(error?.error?.message ?? '');
-            } 
+            }
           })
-        }                        
+        }
       },
       complete: () => {
         ;
@@ -143,10 +138,10 @@ export class LoginComponent implements OnInit{
       error: (error: HttpErrorResponse) => {
         ;
         console.error(error?.error?.message ?? '');
-      } 
+      }
     });
   }
-  
+
   togglePassword() {
     this.showPassword = !this.showPassword;
   }

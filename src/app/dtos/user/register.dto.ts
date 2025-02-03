@@ -1,7 +1,7 @@
 import {
-    IsString, 
-    IsNotEmpty, 
-    IsPhoneNumber, 
+    IsString,
+    IsNotEmpty,
+    IsPhoneNumber,
     IsDate
 } from 'class-validator';
 
@@ -11,7 +11,7 @@ export class RegisterDTO {
 
     @IsPhoneNumber()
     phone_number: string;
-    
+
     @IsString()
     @IsNotEmpty()
     address: string;
