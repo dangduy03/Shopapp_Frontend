@@ -79,7 +79,7 @@ export class ProductService {
     // Upload images for the specified product id
     // return this.http.post<ApiResponse>(`${this.apiBaseUrl}/products/uploads/${productId}`, formData);
     return this.http.post<ApiResponse>(
-      `${this.apiBaseUrl}/products/uploads/${productId}`,
+      `${environment.minioUrl}/products/${productId}`,
       formData
     );
   }

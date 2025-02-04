@@ -3,8 +3,6 @@ import { Product } from '../../models/product';
 import { Category } from '../../models/category';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
-import { HeaderComponent } from '../header/header.component';
-import { FooterComponent } from '../footer/footer.component';
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -18,7 +16,7 @@ import { ApiResponse } from '../../reponses/api.response';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   standalone: true,
-  imports: [FooterComponent, HeaderComponent, CommonModule, FormsModule],
+  imports: [FormsModule, CommonModule],
 })
 export class HomeComponent implements OnInit {
   products: Product[] = [];
@@ -47,13 +45,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.currentPage =
       Number(this.localStorage?.getItem('currentProductPage')) || 0;
-    // this.getProducts(
-    //   this.keyword,
-    //   this.selectedCategoryId,
-    //   this.currentPage,
-    //   this.itemsPerPage
-    // );
-    // this.getCategories(0, 100);
   }
 
   getCategories(page: number, limit: number) {
