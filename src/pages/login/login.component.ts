@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
-  FormsModule,
-  NgForm,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
 import {
   ActivatedRoute,
@@ -19,69 +19,55 @@ import { UserService } from '../../service/user.service';
 import { TokenService } from '../../service/token.service';
 import { UserResponse } from '../../reponses/user/user.response';
 import { ApiResponse } from '../../reponses/api.response';
-import { ToastService } from '../../utils/components/toast/toast.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastService } from '../../utils/components/toast.service';
+import { ToastSeverityEnum } from '../../utils/enums/toast-serverity.enum';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
-  // templateUrl: './login.component.html',
+  imports: [CommonModule, ReactiveFormsModule, ButtonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit {
-  emailOrPhoneNumber: string;
-  password: string;
-  model: any;
-  name: any;
-  // loginForm = new FormGroup({
-  //   emailOrPhoneNumber: new FormControl(''),
-  //   password: new FormControl(''),
-  // });
-
-  // loginData: LoginDTO = {
-  //   emailOrPhoneNumber: this.loginForm.value.emailOrPhoneNumber ?? '',
-  //   password: this.loginForm.value.password ?? '',
-  // };
-
-  // localStorage?: Storage;
-  // userResponse?: UserResponse;
-
-  constructor() {
-    (this.emailOrPhoneNumber = ''), (this.password = '');
-  } // private toastService: ToastService // // private tokenService: TokenService, // private userService: UserService, // // private activatedRoute: ActivatedRoute, // private router: Router,
+  localStorage?: Storage;
+  loginForm = new FormGroup({
+    emailOrPhoneNumber: new FormControl('', [
+      Validators.required,
+      Validators.email,
+    ]),
+    password: new FormControl('', [Validators.required]),
+  });
 
   ngOnInit() {}
+  constructor(
+    private tokenService: TokenService,
+    private userService: UserService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private toastService: ToastService
+  ) {}
 
-  // handleLogin() {
-  //   console.log('dsgfakdsfadshfgjadshfgsfas');
-  //   if (this.loginForm.valid) {
-  //     this.userService.login(this.loginData).subscribe({
-  //       next: (apiResponse: ApiResponse) => {
-  //         if (apiResponse.status == 'OK') {
-  //           this.localStorage?.setItem('user', apiResponse.data);
-  //           this.router.navigate(['/register']);
-  //         }
-  //       },
-  //       complete: () => {},
-  //       error: (error: HttpErrorResponse) => {
-  //         this.toastService.show(
-  //           'Lỗi đăng nhập: Tên đăng nhập hoặc mật khẩu không đúng !',
-  //           'bg-danger text-light'
-  //         );
-  //         console.error(error?.error?.message ?? '');
-  //       },
-  //     });
-  //   } else {
-  //     this.toastService.show(
-  //       'Vui lòng kiểm tra đầy đủ thông tin nhập vào !',
-  //       'bg-danger text-light'
-  //     );
-  //   }
-  // }
-  onSubmit(): void {
-    alert(this.emailOrPhoneNumber);
-  }
-  newActor(): void {
-    console.log('Tuyệt vọng cực kì');
+  onLoginFormSubmit() {
+    if (this.loginForm.valid) {
+      this.userService.login(this.loginForm.value as any).subscribe({
+        next: (apiResponse: ApiResponse) => {
+          if (apiResponse.status == 'OK') {
+            this.localStorage?.setItem('user', apiResponse.data);
+            this.router.navigate(['/register']);
+          }
+        },
+        complete: () => {},
+        error: (error: HttpErrorResponse) => {
+          this.toastService.showToastMessage(
+            ToastSeverityEnum.ERROR,
+            'Login error',
+            'Email/PhoneNumber or password is incorrect'
+          );
+          console.error(error?.error?.message ?? '');
+        },
+      });
+    } else {
+    }
   }
 }
