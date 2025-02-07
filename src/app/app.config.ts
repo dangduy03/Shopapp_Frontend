@@ -1,9 +1,11 @@
 import {
+  APP_INITIALIZER,
   ApplicationConfig,
   importProvidersFrom,
   Provider,
 } from '@angular/core';
 import { provideRouter, RouterModule } from '@angular/router';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
@@ -13,6 +15,8 @@ import {
   provideHttpClient,
   withFetch,
 } from '@angular/common/http';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { MessageService } from 'primeng/api';
 // import { TokenInterceptor } from './interceptors/token.interceptor';
 // import { adminRoutes } from './components/admin/admin-routes';
 
@@ -28,6 +32,8 @@ import {
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    MessageService,
+    provideAnimations(),
     provideRouter(routes),
     //importProvidersFrom(RouterModule.forRoot(routes)),
     // importProvidersFrom(RouterModule.forChild(adminRoutes)),

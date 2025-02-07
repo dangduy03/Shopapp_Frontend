@@ -4,6 +4,12 @@
   "newProjectRoot": "projects",
   "projects": {
     "shopery-frontend": {
+      "i18n": {
+        "sourceLocale": "en-US",
+        "locales": {
+          "vi": "src/utils/locale/vi-VN.locale.xlf"
+        }
+      },
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,6 +23,9 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "localize": [
+              "vi"
+            ],
             "outputPath": "dist/shopery-frontend",
             "index": "src/index.html",
             "browser": "src/main.ts",
