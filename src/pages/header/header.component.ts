@@ -55,7 +55,7 @@ export class HeaderComponent implements OnInit {
     //   this.currentPage,
     //   this.itemsPerPage
     // );
-    this.getCategories(0, 100);
+    // this.getCategories(0, 100);
   }
 
   togglePopover(event: Event): void {

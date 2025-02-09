@@ -18,20 +18,26 @@ export class ProductService {
   // Chuyển danh sách ID thành một chuỗi và truyền vào params
 
   getProducts(
-    keyword: string,
-    categoryId: number,
-    page: number,
-    limit: number
+    keyword?: string,
+    categoryId?: number,
+    page?: number,
+    limit?: number
   ): Observable<ApiResponse> {
     const params = new HttpParams()
-      .set('keyword', keyword)
-      .set('category_id', categoryId)
-      .set('page', page.toString())
-      .set('limit', limit.toString());
+      .set('keyword', keyword || '')
+      .set('category_id', categoryId || '')
+      .set('page', page?.toString() || '')
+      .set('limit', limit?.toString() || '');
     return this.http.get<ApiResponse>(`${this.apiBaseUrl}/products`, {
       params,
     });
     // product_image.image_url = `${environment.minioUrl}/${product_image.image_url}`;
+  }
+
+  getProductsForHomePage() {
+    return this.http.get<ApiResponse>(
+      `${this.apiBaseUrl}/products/getProductByHomePage`
+    );
   }
 
   getDetailProduct(productId: number): Observable<ApiResponse> {

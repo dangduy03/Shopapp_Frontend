@@ -3,6 +3,9 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from '../pages/header/header.component';
 import { FooterComponent } from '../pages/footer/footer.component';
 import { ToastModule } from 'primeng/toast';
+import { DataViewModule } from 'primeng/dataview';
+import { ButtonModule } from 'primeng/button';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 @Component({
   selector: 'app-root',
@@ -13,11 +16,5 @@ import { ToastModule } from 'primeng/toast';
 })
 export class AppComponent {
   title = 'shopery-frontend';
-  ngOnInit() {
-    if (isDevMode()) {
-      console.log('Development!');
-    } else {
-      console.log('Production!');
-    }
-  }
+  ngOnInit() {}
 }

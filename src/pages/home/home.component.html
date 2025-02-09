@@ -1,74 +1,27 @@
-<main>
-  <div class="container">
-    <div class="intro-section">
+<div class="d-flex flex-column align-items-start">
+    <h3 class="p-5">New Costume</h3>
+    <div class="d-flex flex-wrap justify-content-center mt-5 mb-5" style="gap: 2rem">
+        <product-item *ngFor="let product of newerProducts" [imageUrl]="'http://10.147.19.99:9000/' + product.thumbnail"
+            [name]="product.name" [price]="((product.price ?? 0) | number:'1.0-0') + ''">
+        </product-item>
     </div>
-    <div class="search-box">
-        <input type="text" class="form-control search-input" 
-            placeholder="Tìm sản phẩm" 
-            [(ngModel)]="keyword">
-        <select class="form-control product-category"             
-            [(ngModel)]="selectedCategoryId">
-            <option [value]="0">Tất cả</option> 
-            @for(category of categories; track category.name) {
-              <option [value]="category.id">
-                {{ category.name }}
-              </option>
-            } 
-        </select>
-        
-        <button class="btn btn-primary" (click)="searchProducts()">Tìm kiếm</button>
+</div>
+<div>
+    <h3>Last Pick</h3>
+    <div class="d-flex flex-wrap justify-content-center mt-5 mb-5" style="gap: 2rem">
+        <product-item *ngFor="let product of lastProducts" [imageUrl]="'http://10.147.19.99:9000/' + product.thumbnail"
+            [name]="product.name" [price]="((product.price ?? 0) | number:'1.0-0') + ''">
+        </product-item>
     </div>
-            
-    <div class="row">
-        @for(product of products; track product.id) {
-          <div class="col-lg-4 col-md-6">
-            <div class="product-item" (click)="onProductClick(product.id)">
-                <img [src]="product.url" alt="Product Image" class="product-image">
-                <h3 class="product-name">{{ product.name }}</h3>
-                <p class="product-description">{{ product.description }}</p>
-                <p class="product-price">Giá: ${{ product.price }}</p>                
-            </div>
-          </div>
-        }        
+</div>
+<div>
+    <h3>Deal for your</h3>
+    <div class="d-flex flex-wrap justify-content-center mt-5 mb-5" style="gap: 2rem">
+        <product-item *ngFor="let product of randomProducts"
+            [imageUrl]="'http://10.147.19.99:9000/' + product.thumbnail" [name]="product.name"
+            [price]="((product.price ?? 0) | number:'1.0-0') + ''">
+        </product-item>
     </div>
-  </div>
+</div>
 
-  <div class="d-flex justify-content-center">
-    <nav aria-label="Page navigation">
-      <ul class="pagination">
-        @if(currentPage > 0) {
-          <li class="page-item">
-            <a class="page-link" (click)="onPageChange(0)">First</a>
-          </li>
-        }
 
-        @if(currentPage > 0) {
-          <li class="page-item">
-            <a class="page-link" (click)="onPageChange(currentPage - 1)">
-              <i class="fa fa-chevron-left"></i>
-            </a>
-          </li>
-        } 
-                    
-        @for(page of visiblePages; track page) {
-          <ng-container>
-            <li class="page-item" [ngClass]="{'active': page === currentPage + 1}">
-              <a class="page-link" (click)="onPageChange(page - 1)">{{ page }}</a>
-            </li>
-          </ng-container>
-        }     
-        
-         @if(currentPage < totalPages - 1)  {
-          <li class="page-item">
-            <a class="page-link" (click)="onPageChange(currentPage + 1)">
-              <i class="fa fa-chevron-right"></i>
-            </a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" (click)="onPageChange(totalPages - 1)">Last</a>
-          </li>
-         }        
-      </ul>
-    </nav>
-  </div>
-</main>
