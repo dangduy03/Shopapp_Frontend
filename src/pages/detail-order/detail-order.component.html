@@ -1,45 +1,40 @@
-<div class="container">
-    <div class="intro-section">
-        <h1>Chi tiết đơn hàng</h1>
-        <p>Xem thông tin chi tiết đơn hàng</p>
-    </div>
-
+<!-- <div class="container">
     @if(orderResponse) {
     <div class="row">
         <div class="col-md-6">
-            <h2 class="product-header">Thông tin người nhận</h2>
+            <h2 class="product-header">Consignee information</h2>
             <div class="mb-3">
-                <p class="form-label">Họ và tên: {{ orderResponse.fullname }}</p>
+                <p class="form-label">Full name: {{ orderResponse.fullname }}</p>
             </div>
             <div class="mb-3">
                 <p class="form-label">Email: {{ orderResponse.email }}</p>
             </div>
             <div class="mb-3">
-                <p class="form-label">Số điện thoại: {{ orderResponse.phone_number }}</p>
+                <p class="form-label">Phone number: {{ orderResponse.phone_number }}</p>
             </div>
             <div class="mb-3">
-                <p class="form-label">Địa chỉ: {{ orderResponse.address }}</p>
+                <p class="form-label">Address: {{ orderResponse.address }}</p>
             </div>
             <div class="mb-3">
-                <p class="form-label">Ghi chú: {{ orderResponse.note }}</p>
+                <p class="form-label">Note: {{ orderResponse.note }}</p>
             </div>
             <div class="mb-3">
-                <p class="form-label">Phương thức vận chuyển: {{ orderResponse.shipping_method }}</p>
+                <p class="form-label">Shipping method: {{ orderResponse.shipping_method }}</p>
             </div>
             <div class="mb-3">
-                <p class="form-label">Phương thức thanh toán: {{ orderResponse.payment_method }}</p>
+                <p class="form-label">Payment method: {{ orderResponse.payment_method }}</p>
             </div>
         </div>
 
         <div class="col-md-6">
-            <h2 class="product-order">Sản phẩm đã đặt hàng</h2>
+            <h2 class="product-order">Products ordered</h2>
             <table>
                 <thead>
                     <tr>
-                        <th scope="col" class="text-start">Sản phẩm</th>
-                        <th scope="col">Số lượng</th>
-                        <th scope="col">Đơn giá</th>
-                        <th scope="col">Tổng giá</th>
+                        <th scope="col" class="text-start">Product</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Unit price</th>
+                        <th scope="col">Total price</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -59,7 +54,245 @@
                 </tbody>
             </table>
             <div class="text-start mt-3">
-                <h4 class="header-text text-end">Tổng giá: {{ orderResponse.total_money | number:'1.2-2' }}</h4>
+                <h4 class="header-text text-end">Total price: {{ orderResponse.total_money | number:'1.2-2' }}</h4>
+            </div>
+        </div>
+    </div>
+    }
+</div> -->
+
+<!-- <div class="container py-5">
+    <button class="btn btn-outline-secondary mb-4" (click)="backToHome()">
+        <i class="fas fa-arrow-left me-2"></i>Back to Home
+    </button>
+
+    @if(orderResponse) {
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Order Information</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="mb-3 text-primary">
+                        <i class="fas fa-user me-2"></i>Consignee Information
+                    </h4>
+                    <div class="mb-3">
+                        <p><strong>Full name:</strong> {{ orderResponse.fullname }}</p>
+                    </div>
+                    <div class="mb-3">
+                        <p><strong>Email:</strong> {{ orderResponse.email }}</p>
+                    </div>
+                    <div class="mb-3">
+                        <p><strong>Phone number:</strong> {{ orderResponse.phone_number }}</p>
+                    </div>
+                    <div class="mb-3">
+                        <p><strong>Address:</strong> {{ orderResponse.address }}</p>
+                    </div>
+                    <div class="mb-3">
+                        <p><strong>Note:</strong> {{ orderResponse.note || 'No note' }}</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <h4 class="mb-3 text-primary">
+                        <i class="fas fa-truck me-2"></i>Shipping & Payment
+                    </h4>
+                    <div class="mb-3">
+                        <p><strong>Shipping method:</strong> {{ orderResponse.shipping_method }}</p>
+                    </div>
+                    <div class="mb-3">
+                        <p><strong>Payment method:</strong> {{ orderResponse.payment_method }}</p>
+                    </div>
+                    <div class="mb-3">
+                        <p><strong>Order date:</strong> {{ orderResponse.order_date | date:'medium' }}</p>
+                    </div>
+                    <div class="mb-3">
+                        <p><strong>Status:</strong>
+                            <span class="badge" [ngClass]="{
+                        'bg-warning': orderResponse.status === 'pending',
+                        'bg-success': orderResponse.status === 'completed',
+                        'bg-danger': orderResponse.status === 'cancelled'
+                      }">
+                                {{ orderResponse.status }}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Ordered Products</h3>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col" class="text-start">Product</th>
+                            <th scope="col" class="text-center">Quantity</th>
+                            <th scope="col" class="text-center">Unit Price</th>
+                            <th scope="col" class="text-center">Total Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for(item of orderResponse.order_details; track item.product.name) {
+                        <tr>
+                            <td>
+                                <div class="product-info d-flex align-items-center">
+                                    <img [src]="item.product.thumbnail" alt="Product Image" class="product-image me-3">
+                                    <div>
+                                        <h6 class="mb-0">{{ item.product.name }}</h6>
+                                        <small class="text-muted">SKU: {{ item.product.id }}</small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="text-center">{{ item.number_of_products }}</td>
+                            <td class="text-center">{{ item.price | number:'1.2-2' }} VNĐ</td>
+                            <td class="text-center">{{ item.total_money | number:'1.2-2' }} VNĐ</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="text-end mt-4">
+                <h4 class="mb-3">
+                    <span class="text-muted me-2">Total:</span>
+                    <span class="text-primary">{{ orderResponse.total_money | number:'1.2-2' }} VNĐ</span>
+                </h4>
+            </div>
+        </div>
+    </div>
+    }
+</div> -->
+
+<div class="container py-4">
+    <button (click)="backToHome()" class="btn btn-outline-secondary mb-3">
+        <i class="fas fa-arrow-left me-2"></i> Quay lại danh sách đơn hàng
+    </button>
+
+    @if(isLoading) {
+    <div class="text-center py-5">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="mt-2">Đang tải chi tiết đơn hàng...</p>
+    </div>
+    }
+
+    @if(errorMessage) {
+    <div class="alert alert-danger">
+        <i class="fas fa-exclamation-circle me-2"></i>
+        {{ errorMessage }}
+        @if(orderId) {
+        <button (click)="retryLoading()" class="btn btn-sm btn-primary ms-3">
+            <i class="fas fa-sync-alt me-1"></i> Thử lại
+        </button>
+        }
+    </div>
+    }
+
+    @if(orderResponse && !isLoading) {
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-primary text-white">
+            <h3 class="mb-0">Đơn hàng #{{orderResponse.id}}</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4 class="mb-3 text-primary">
+                        <i class="fas fa-user me-2"></i>Consignee Information
+                    </h4>
+                    <div class="mb-3">
+                        <p><strong>Full name:</strong> {{ orderResponse.fullname }}</p>
+                    </div>
+                    <div class="mb-3">
+                        <p><strong>Email:</strong> {{ orderResponse.email }}</p>
+                    </div>
+                    <div class="mb-3">
+                        <p><strong>Phone number:</strong> {{ orderResponse.phone_number }}</p>
+                    </div>
+                    <div class="mb-3">
+                        <p><strong>Address:</strong> {{ orderResponse.address }}</p>
+                    </div>
+                    <div class="mb-3">
+                        <p><strong>Note:</strong> {{ orderResponse.note || 'No note' }}</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <h4 class="mb-3 text-primary">
+                        <i class="fas fa-truck me-2"></i>Shipping & Payment
+                    </h4>
+                    <div class="mb-3">
+                        <p><strong>Shipping method:</strong> {{ orderResponse.shipping_method }}</p>
+                    </div>
+                    <div class="mb-3">
+                        <p><strong>Payment method:</strong> {{ orderResponse.payment_method }}</p>
+                    </div>
+                    <div class="mb-3">
+                        <p><strong>Order date:</strong> {{ orderResponse.order_date | date:'medium' }}</p>
+                    </div>
+                    <div class="mb-3">
+                        <p><strong>Status:</strong>
+                            <span class="badge" [ngClass]="{
+                        'bg-warning': orderResponse.status === 'pending',
+                        'bg-success': orderResponse.status === 'completed',
+                        'bg-danger': orderResponse.status === 'cancelled'}">
+                                {{ orderResponse.status }}
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">Ordered Products</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col" class="text-start">Product</th>
+                                <th scope="col" class="text-center">Quantity</th>
+                                <th scope="col" class="text-center">Unit Price</th>
+                                <th scope="col" class="text-center">Total Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for(item of orderResponse.order_details; track item.product.name) {
+                            <tr>
+                                <td>
+                                    <div class="product-info d-flex align-items-center">
+                                        <img [src]="item.product.thumbnail" alt="Product Image"
+                                            class="product-image me-3">
+                                        <div>
+                                            <h6 class="mb-0">{{ item.product.name }}</h6>
+                                            <small class="text-muted">SKU: {{ item.product.id }}</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center">{{ item.number_of_products }}</td>
+                                <td class="text-center">{{ item.price | number:'1.2-2' }} VNĐ</td>
+                                <td class="text-center">{{ item.total_money | number:'1.2-2' }} VNĐ</td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="text-end mt-4">
+                    <h4 class="mb-3">
+                        <span class="text-muted me-2">Total:</span>
+                        <span class="text-primary">{{ orderResponse.total_money | number:'1.2-2' }} VNĐ</span>
+                    </h4>
+                </div>
             </div>
         </div>
     </div>

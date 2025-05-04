@@ -1,6 +1,4 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { HeaderComponent } from '../header/header.component';
-import { FooterComponent } from '../footer/footer.component';
 import {
   FormBuilder,
   FormGroup,
@@ -18,7 +16,6 @@ import { CommonModule, NgFor } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { TokenService } from '../../service/token.service';
 import { Order } from '../../models/order';
-import { BrowserModule } from '@angular/platform-browser';
 import { ApiResponse } from '../../reponses/api.response';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CouponService } from '../../service/coupon.service';
@@ -27,23 +24,16 @@ import { CouponService } from '../../service/coupon.service';
   selector: 'app-order',
   standalone: true,
   imports: [
-    HeaderComponent,
-    FooterComponent,
     FormsModule,
     NgFor,
     RouterModule,
     CommonModule,
-    // FormGroup,
     ReactiveFormsModule,
-    BrowserModule,
   ],
   templateUrl: './order.component.html',
   styleUrl: './order.component.scss',
 })
 
-// export class OrderComponent {
-
-// }
 export class OrderComponent implements OnInit {
   private couponService = inject(CouponService);
   private cartService = inject(CartService);
@@ -59,6 +49,7 @@ export class OrderComponent implements OnInit {
   couponDiscount: number = 0; //số tiền được discount từ coupon
   couponApplied: boolean = false;
   cart: Map<number, number> = new Map();
+
   orderData: OrderDTO = {
     user_id: 0, // Thay bằng user_id thích hợp
     fullname: '', // Khởi tạo rỗng, sẽ được điền từ form
@@ -78,7 +69,7 @@ export class OrderComponent implements OnInit {
     // Tạo FormGroup và các FormControl tương ứng
     this.orderForm = this.formBuilder.group({
       fullname: ['', Validators.required], // fullname là FormControl bắt buộc
-      email: ['', [Validators.email]], // Sử dụng Validators.email cho kiểm tra định dạng email
+      email: ['', [Validators.required,Validators.email]], // Sử dụng Validators.email cho kiểm tra định dạng email
       phone_number: ['', [Validators.required, Validators.minLength(6)]], // phone_number bắt buộc và ít nhất 6 ký tự
       address: ['', [Validators.required, Validators.minLength(5)]], // address bắt buộc và ít nhất 5 ký tự
       note: [''],
@@ -92,31 +83,27 @@ export class OrderComponent implements OnInit {
     //this.cartService.clearCart();
     this.orderData.user_id = this.tokenService.getUserId();
     // Lấy danh sách sản phẩm từ giỏ hàng
-
     this.cart = this.cartService.getCart();
     const productIds = Array.from(this.cart.keys()); // Chuyển danh sách ID từ Map giỏ hàng
-
     // Gọi service để lấy thông tin sản phẩm dựa trên danh sách ID
-
     if (productIds.length === 0) {
       return;
     }
     this.productService.getProductsByIds(productIds).subscribe({
       next: (apiResponse: ApiResponse) => {
-        const products: Product[] = apiResponse.data;
+        const products: Product[] = apiResponse.data
         // Lấy thông tin sản phẩm và số lượng từ danh sách sản phẩm và giỏ hàng
         this.cartItems = productIds.map((productId) => {
           const product = products.find((p) => p.id === productId);
           if (product) {
-            // product.thumbnail = `${environment.apiBaseUrl}/products/images/${product.thumbnail}`;
-            product.url = `${environment.minioUrl}/${product.thumbnail}`;
+            product.thumbnail = `${environment.minioUrl}/${product.thumbnail}`;
           }
           return {
             product: product!,
             quantity: this.cart.get(productId)!,
           };
         });
-        console.log('haha');
+        console.log('lỗi');
       },
       complete: () => {
         this.calculateTotal();
@@ -126,18 +113,12 @@ export class OrderComponent implements OnInit {
       },
     });
   }
+
+  // Khi bấm nút "Đặt hàng"
   placeOrder() {
+    // debugger
     if (this.orderForm.errors == null) {
       // Gán giá trị từ form vào đối tượng orderData
-      /*
-      this.orderData.fullname = this.orderForm.get('fullname')!.value;
-      this.orderData.email = this.orderForm.get('email')!.value;
-      this.orderData.phone_number = this.orderForm.get('phone_number')!.value;
-      this.orderData.address = this.orderForm.get('address')!.value;
-      this.orderData.note = this.orderForm.get('note')!.value;
-      this.orderData.shipping_method = this.orderForm.get('shipping_method')!.value;
-      this.orderData.payment_method = this.orderForm.get('payment_method')!.value;
-      */
       // Sử dụng toán tử spread (...) để sao chép giá trị từ form vào orderData
       this.orderData = {
         ...this.orderData,
@@ -145,13 +126,14 @@ export class OrderComponent implements OnInit {
       };
       this.orderData.cart_items = this.cartItems.map((cartItem) => ({
         product_id: cartItem.product.id,
-        quantity: cartItem.quantity,
+        quantity: cartItem.quantity
       }));
       this.orderData.total_money = this.totalAmount;
       // Dữ liệu hợp lệ, bạn có thể gửi đơn hàng đi
       this.orderService.placeOrder(this.orderData).subscribe({
         next: (response: ApiResponse) => {
           console.error('Đặt hàng thành công');
+          // Khi bấm nút "Đặt hàng"
           this.cartService.clearCart();
           this.router.navigate(['/']);
         },
@@ -191,6 +173,7 @@ export class OrderComponent implements OnInit {
       0
     );
   }
+  
   confirmDelete(index: number): void {
     if (confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')) {
       // Xóa sản phẩm khỏi danh sách cartItems
@@ -223,4 +206,13 @@ export class OrderComponent implements OnInit {
     });
     this.cartService.setCart(this.cart);
   }
+
+  updateQuantity(index: number, newQuantity: number) {
+    if (newQuantity < 1) {
+        this.cartItems[index].quantity = 1; // Không cho nhập số nhỏ hơn 1
+    } else {
+        this.cartItems[index].quantity = newQuantity;
+    }
+}
+
 }

@@ -13,7 +13,7 @@ import { UpdateCategoryDTO } from '../dtos/category/update.category.dto';
 export class CategoryService {
   private apiBaseUrl = environment.apiBaseUrl;
 
-  private apiGetCategories = `${environment.apiBaseUrl}/categories`;
+  // private apiGetCategories = `${environment.apiBaseUrl}/categories`;
 
   constructor(private http: HttpClient) {}
   getCategories(page: number, limit: number): Observable<ApiResponse> {

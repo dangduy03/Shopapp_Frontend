@@ -5,9 +5,10 @@
                 <h1 class="ps-5 pe-5 col-sm-12 text-center">Sign in</h1>
                 <div class="container">
                     <div class="mb-3">
-                        <label i18n for="emailOrPhoneNumberInput" class="form-label">Email or Phone Number</label>
-                        <input i18n-placeholder type="email" class="form-control" id="emailOrPhoneNumberInput" name="emailOrPhoneNumber"
-                            formControlName="emailOrPhoneNumber" placeholder="Email or Phone Number">
+                        <label i18n for="phoneNumberOrEmailInput" class="form-label">Email or Phone Number</label>
+                        <input i18n-placeholder type="email" class="form-control" id="phoneNumberOrEmailInput"
+                            name="phoneNumberOrEmail" formControlName="phoneNumberOrEmail"
+                            placeholder="Email or Phone Number">
                     </div>
 
                     <div class="mb-3">
@@ -15,7 +16,17 @@
                         <input i18n-placeholder type="password" class="form-control" id="passwordInput" name="password"
                             formControlName="password" placeholder="Password">
                     </div>
+
+                    <div class="mb-3">
+                        <select class="form-control" id="roleSelect" formControlName="role" [hidden]="true">
+                            <option value="" disabled selected>Login Permissions</option>
+                            <option *ngFor="let role of roles" [value]="role.name">
+                                {{ role.name }}
+                            </option>
+                        </select>
+                    </div>
                 </div>
+
                 <div class="container">
                     <div class="row mb-3">
                         <div class="col-6">
@@ -34,11 +45,12 @@
                     </div>
                 </div>
                 <div class="container mb-3">
-                    <div class="d-grid"><button class="btn btn-success" type="submit">Login</button></div>
+                    <div class="d-grid"><button class="btn btn-success" type="submit" >Login</button></div>
                 </div>
                 <div class="container d-flex justify-content-center">
-                    <p i18n class="mb-0">Don't have account? <a class="text-decoration-none fw-bold" style=" color: #212529;"
-                            routerLink="/register">Register</a>
+                    <p i18n class="mb-0">Don't have account?
+                        <a class="register-link text-decoration-none fw-bold" style=" color: #212529; "
+                            (click)="createAccount()" href="register">Register</a>
                     </p>
                 </div>
             </div>

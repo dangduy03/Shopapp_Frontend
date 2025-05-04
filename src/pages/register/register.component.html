@@ -1,42 +1,115 @@
 <div class="container-xxl d-flex justify-content-center my-5 py-5">
     <div class="card shadow rounded col-5 py-3">
         <div class="card-body">
-            <h1 class="ps-5 pe-5 col-sm-12 text-center">Create Account</h1>
-            <div class="container">
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Email">
+            <h2 class="ps-5 pe-5 col-sm-12 text-center">Register Account</h2>
+            <form #registerForm="ngForm">
+                <div class="container">
+                    <div class="mb-3">
+                        <label for="full-name" class="form-label">Full Name</label>
+                        <input type="text" [(ngModel)]="fullName" name="fullName" class="form-control" id="full-name"
+                            placeholder="Full name">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Phone's number</label>
+                        <input type="text" class="form-control" [(ngModel)]="phoneNumber"
+                            (input)="onPhoneNumberChange()" name="phone" (focus)="registerForm.form.markAsTouched()"
+                            required id="phoneNumber" placeholder="Phone's number">
+                        @if(phoneNumber.length < 6 && registerForm.form.touched) { <p class="text-danger">
+                            Phone number must be at least 6 characters
+                            </p>
+                            }
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" [(ngModel)]="email" name="email" class="form-control" id="email"
+                            placeholder="Email">
+                        <div class="form-floating-icon">
+                            <i class="uil uil-envelope-alt"></i>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Address</label>
+                        <input type="text" [(ngModel)]="address" name="address" class="form-control" id="address"
+                            placeholder="Address">
+                    </div>
+
+                    <div class="mb-3 position-relative">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="input-group">
+                            <input type="password" [(ngModel)]="password" name="password" class="form-control" required
+                                id="password" placeholder="Password">
+                            <button class="btn btn-outline-secondary" type="button" (click)="togglePassword()">
+                                <i class="fas" [ngClass]="showPassword ? 'fa-eye' : 'fa-eye-slash'"></i>
+                            </button>
+                        </div>
+                        @if(password.length < 3 && registerForm.form.touched) { <p class="text-danger">Password must be
+                            at least 3 characters</p>
+                            }
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="retype-password" class="form-label">Confirm Password</label>
+                        <div class="input-group">
+                            <input type="password" [(ngModel)]="retypePassword" name="retypePassword"
+                                (input)="registerForm.form.markAsTouched(); checkPasswordsMatch()" class="form-control"
+                                required id="retype-password" placeholder="Confirm Password">
+                            <button class="btn btn-outline-secondary" type="button" (click)="togglePassword()">
+                                <i class="fas" [ngClass]="showPassword ? 'fa-eye' : 'fa-eye-slash'"></i>
+                            </button>
+                        </div>
+                        @if(retypePassword.length < 3 && registerForm.form.touched) { <p class="text-danger">Password
+                            must be at least 3 characters</p>
+                            }
+                            @if(registerForm.controls['retypePassword'].hasError('passwordMismatch') &&
+                            registerForm.form.touched) {
+                            <p class="text-danger">Password doesn't match</p>
+                            }
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="date-of-birth" class="form-label">Date of birth</label>
+                        <input type="date" class="form-control" required id="date-of-birth" [(ngModel)]="dateOfBirth"
+                            name="dateOfBirth" (input)="registerForm.form.markAsTouched(); checkAge()">
+                        @if(registerForm.controls['dateOfBirth'].hasError('invalidAge')
+                        && registerForm.form.touched){
+                        <p class="text-danger">
+                            You are under 18 years old
+                        </p>
+                        }
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleFormControlInput2" placeholder="Password">
-                </div>
-                <div class="mb-3">
-                    <label for="exampleFormControlInput1" class="form-label">Confirm password</label>
-                    <input type="password" class="form-control" id="exampleFormControlInput2"
-                        placeholder="Confirm password">
-                </div>
-            </div>
-            <div class="container">
-                <div class="row mb-3">
-                    <div class="col-12">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Accept all terms & Conditions
-                            </label>
+
+                <div class="container">
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input class="form-check-input" [(ngModel)]="isAccepted" name="isAccepted"
+                                    type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Accept all terms & Conditions
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="container mb-3">
-                <div class="d-grid"><button class="btn btn-success" type="button">Create Account</button></div>
-            </div>
-            <div class="container d-flex justify-content-center">
-                <p class="mb-0">Already have account <a class="text-decoration-none fw-bold" style=" color: #212529;"
-                        routerLink="/login">Login</a>
-                </p>
-            </div>
+
+                <div class="container mb-3">
+                    <div class="d-grid">
+                        <button class="register-button btn btn-success" type="button" (click)="register()">Create
+                            Account</button>
+                    </div>
+                </div>
+
+                <div class="container d-flex justify-content-center">
+                    <p class="mb-0">Already have account
+                        <a class="text-decoration-none fw-bold" style=" color: #212529;" href="login" >Login</a>
+                    </p>
+                </div>
+            </form>
         </div>
     </div>
 </div>

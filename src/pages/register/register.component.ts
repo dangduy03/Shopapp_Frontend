@@ -1,42 +1,43 @@
 import { Component, ViewChild } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { UserService } from '../../service/user.service';
 import { RegisterDTO } from '../../dtos/user/register.dto';
 import { ApiResponse } from '../../reponses/api.response';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, CommonModule, RouterLink],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule, ButtonModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
   @ViewChild('registerForm') registerForm!: NgForm;
   // Khai báo các biến tương ứng với các trường dữ liệu trong form
+  fullName: string;
   phoneNumber: string;
+  email: string;
+  address: string;
   password: string;
   retypePassword: string;
-  fullName: string;
-  address: string;
   isAccepted: boolean;
   dateOfBirth: Date;
   showPassword: boolean = false;
 
   constructor(private router: Router, private userService: UserService) {
-    debugger;
+    this.fullName = '';
     this.phoneNumber = '';
+    this.email = '';
+    this.address = '';
     this.password = '';
     this.retypePassword = '';
-    this.fullName = '';
-    this.address = '';
     this.isAccepted = true;
     this.dateOfBirth = new Date();
     this.dateOfBirth.setFullYear(this.dateOfBirth.getFullYear() - 18);
-    //inject
   }
 
   onPhoneNumberChange() {
@@ -46,31 +47,33 @@ export class RegisterComponent {
 
   register() {
     const message =
+      `fullName: ${this.fullName}` +
       `phone: ${this.phoneNumber}` +
+      `email: ${this.email}` +
+      `address: ${this.address}` +
       `password: ${this.password}` +
       `retypePassword: ${this.retypePassword}` +
-      `address: ${this.address}` +
-      `fullName: ${this.fullName}` +
       `isAccepted: ${this.isAccepted}` +
       `dateOfBirth: ${this.dateOfBirth}`;
     //console.error(message);
-    debugger;
+    // debugger;
 
     const registerDTO: RegisterDTO = {
-      fullname: this.fullName,
-      phone_number: this.phoneNumber,
-      address: this.address,
-      password: this.password,
-      retype_password: this.retypePassword,
-      date_of_birth: this.dateOfBirth,
-      facebook_account_id: 0,
-      google_account_id: 0,
-      role_id: 1,
+      "fullname": this.fullName,
+      "phone_number": this.phoneNumber,
+      "email": this.email,
+      "address": this.address,
+      "password": this.password,
+      "retype_password": this.retypePassword,
+      "date_of_birth": this.dateOfBirth,
+      "facebook_account_id": 0,
+      "google_account_id": 0,
+      "role_id": 1,
     };
 
     this.userService.register(registerDTO).subscribe({
       next: (apiResponse: ApiResponse) => {
-        debugger;
+        // debugger;
         const confirmation = window.confirm(
           'Đăng ký thành công, mời bạn đăng nhập. Bấm "OK" để chuyển đến trang đăng nhập.'
         );
@@ -79,10 +82,10 @@ export class RegisterComponent {
         }
       },
       complete: () => {
-        debugger;
+        // debugger;
       },
       error: (error: HttpErrorResponse) => {
-        debugger;
+        // debugger;
         console.error(error?.error?.message ?? '');
       },
     });

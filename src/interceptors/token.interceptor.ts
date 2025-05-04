@@ -3,24 +3,23 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { TokenService } from "../service/token.service";
 
-@Injectable ()
+@Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-    constructor(private tokenService: TokenService) {}
-    
+    constructor(private tokenService: TokenService) { }
+
     intercept(
-        req: HttpRequest<any>, 
+        req: HttpRequest<any>,
         next: HttpHandler): Observable<HttpEvent<any>> {
+        debugger
         const token = this.tokenService.getToken();
-        if (token) {
-            req = req .clone({
+        if (token && token.trim() !== '') {
+            req = req.clone({
                 setHeaders: {
-                    Authorization: `Baerer ${token}`,
+                    Authorization: `Bearer ${token}`,
                 },
             });
         }
         return next.handle(req);
     }
-    //Đăng ký interceptor trong  module
-
 
 }
