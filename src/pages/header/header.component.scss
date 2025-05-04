@@ -37,7 +37,7 @@ header {
 /* Add this CSS to your project's stylesheet */
 
 .popover-list {
-    padding: 10px;
+    padding: 0px 10px 0px 10px;
 }
 
 .popover-body {
@@ -48,15 +48,15 @@ header {
     display: block;
     margin-bottom: 5px;
     text-decoration: none;
-    color: $shopapp-title-color;
+    color: #333;
 }
 
 .popover-item:hover {
-    background-color: $shopapp-title-color;
+    background-color: #f0f0f0;
     color: $shopapp-color;
 }
 
-
+////////////////////////////////////////
 
 p {
     margin: 0;
@@ -105,10 +105,15 @@ strong {
 }
 
 .breadcrumb-container {
-    background-image: url('../../assets/images/Breadcrumbs.png');
+    background-image: url('../../assets/images/yptvddzi.webp');
     background-repeat: no-repeat;
     background-size: cover;
     background-position-y: center;
+}
+
+.py-5 {
+    padding-top: 12rem !important;
+    padding-bottom: 3rem !important;
 }
 
 ol {

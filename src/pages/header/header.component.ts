@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, DestroyRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -14,6 +14,8 @@ import { environment } from '../../environments/environment';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ApiResponse } from '../../reponses/api.response';
 import { FormsModule } from '@angular/forms';
+import { CartService } from '../../service/cart.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -24,8 +26,11 @@ import { FormsModule } from '@angular/forms';
 })
 export class HeaderComponent implements OnInit {
   userResponse?: UserResponse | null;
-  isPopoverOpen = false;
+  // isPopoverOpen = false;
   activeNavItem: number = 0;
+  cartItemCount: number = 0;
+  cartTotal: number = 0;
+
   products: Product[] = [];
   categories: Category[] = []; // Dữ liệu động từ categoryService
   selectedCategoryId: number = 0; // Giá trị category được chọn
@@ -43,8 +48,10 @@ export class HeaderComponent implements OnInit {
     private categoryService: CategoryService,
     private userService: UserService,
     private tokenService: TokenService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private cartService: CartService,
+    private destroyRef: DestroyRef
+  ) { }
   ngOnInit() {
     this.userResponse = this.userService.getUserResponseFromLocalStorage();
     this.currentPage =
@@ -56,15 +63,18 @@ export class HeaderComponent implements OnInit {
     //   this.itemsPerPage
     // );
     // this.getCategories(0, 100);
+    // this.updateCartInfo();
+    // Theo dõi thay đổi giỏ hàng
+    this.cartService.getCartUpdates().subscribe({
+      next: () => {
+        this.cartItemCount = this.cartService.getCartItemCount();
+        this.cartTotal = this.cartService.getCartTotal();
+      },
+    });
   }
 
-  togglePopover(event: Event): void {
-    event.preventDefault();
-    this.isPopoverOpen = !this.isPopoverOpen;
-  }
 
   handleItemClick(index: number): void {
-    //console.error(`Clicked on "${index}"`);
     if (index === 0) {
       this.router.navigate(['/user-profile']);
     } else if (index === 2) {
@@ -72,7 +82,6 @@ export class HeaderComponent implements OnInit {
       this.tokenService.removeToken();
       this.userResponse = this.userService.getUserResponseFromLocalStorage();
     }
-    this.isPopoverOpen = false; // Close the popover after clicking an item
   }
 
   setActiveNavItem(index: number) {
@@ -80,12 +89,17 @@ export class HeaderComponent implements OnInit {
     //console.error(this.activeNavItem);
   }
 
+  // private updateCartInfo(): void {
+  //   this.cartItemCount = this.cartService.getCartItemCount();
+  //   this.cartTotal = this.cartService.getCartTotal();
+  // }
+
   getCategories(page: number, limit: number) {
     this.categoryService.getCategories(page, limit).subscribe({
       next: (apiResponse: ApiResponse) => {
         this.categories = apiResponse.data;
       },
-      complete: () => {},
+      complete: () => { },
       error: (error: HttpErrorResponse) => {
         console.error(error?.error?.message ?? '');
       },

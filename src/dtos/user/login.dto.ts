@@ -6,15 +6,18 @@ import {
 
 export class LoginDTO {
   @IsString()
-  emailOrPhoneNumber: string;
+  phoneNumberOrEmail: string;
 
   @IsString()
   @IsNotEmpty()
   password: string;
 
+  role_id: number;
+
   constructor(data: any) {
-    this.emailOrPhoneNumber = data.emailOrPhoneNumber;
+    this.phoneNumberOrEmail = data.phoneNumberOrEmail;
     this.password = data.password;
+    this.role_id = data.role_id
   }
 }
 

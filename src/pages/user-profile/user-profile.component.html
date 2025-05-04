@@ -1,33 +1,30 @@
 <div class="container-xxl d-flex justify-content-center my-5 py-5">
   <div class="container d-flex flex-wrap justify-content-between">
-    <!-- Card 1 -->
+
     <div class="col-6 p-2 d-flex">
       <div class="card w-100">
         <div class="card-body text-center">
           <img class="rounded-circle mx-auto d-block mb-2" width="120" height="120"
             src="https://play-lh.googleusercontent.com/7Ak4Ye7wNUtheIvSKnVgGL_OIZWjGPZNV6TP_3XLxHC-sDHLSE45aDg41dFNmL5COA" />
-          <h5>Dianne Russell</h5>
-          <p>Customer</p>
+          <h5>Nguyễn Quảng</h5>
           <a class="color-success text-decoration-none" href="#">Edit Profile</a>
         </div>
       </div>
     </div>
 
-    <!-- Card 2 -->
     <div class="col-6 p-2 d-flex">
       <div class="card w-100">
         <div class="card-body d-flex flex-column justify-content-evenly">
           <h6 class="py-2">Billing Address</h6>
-          <h5 class="py-2">Dianne Russell</h5>
-          <p class="mb-2">4140 Parker Rd. Allentown, New Mexico 31134</p>
-          <p class="mb-2">dainne.ressell&#64;gmail.com</p>
-          <p class="mb-2">(671) 555-0110</p>
-          <a class="color-success text-decoration-none" href="#">Edit Address</a>
+          <h5 class="py-2">Nguyễn Quảng</h5>
+          <p class="mb-2">Đà Nẵng</p>
+          <p class="mb-2">quang&#64;gmail.com</p>
+          <p class="mb-2">0905663509</p>
+          <a class="color-success text-decoration-none" href="profile">Edit Address</a>
         </div>
       </div>
     </div>
 
-    <!-- Card 3 -->
     <div class="col-12 p-2 d-flex">
       <div class="card w-100">
         <div class="card-body">
@@ -43,7 +40,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <!-- <tr>
                 <td>#738</td>
                 <td>20-12-2024</td>
                 <td>$135.00</td>
@@ -84,7 +81,7 @@
                 <td>$135.00</td>
                 <td>Pending</td>
                 <td>...</td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
         </div>
@@ -92,3 +89,58 @@
     </div>
   </div>
 </div>
+
+<!-- <form [formGroup]="userProfileForm">
+  <div class="row">
+    <div class="col-md-3 mx-auto">
+      <h2 class="product-header">Thông tin người dùng</h2>
+      <div class="mb-3">
+        <label for="fullname" class="form-label">Họ và tên</label>
+        <input type="text" formControlName="fullname" class="form-control" id="fullname"
+          [class.is-invalid]="userProfileForm.get('fullname')!.invalid && userProfileForm.get('fullname')!.touched">
+        @if(userProfileForm.get('fullname')!.invalid &&
+        userProfileForm.get('fullname')!.touched) {
+        <div class="invalid-feedback">
+          Họ và tên là trường bắt buộc.
+        </div>
+        }
+      </div>
+      <div class="mb-3">
+        <label for="address" class="form-label">Address</label>
+        <input type="text" formControlName="address" class="form-control" id="address"
+          [class.is-invalid]="userProfileForm.get('address')!.invalid && userProfileForm.get('address')!.touched">
+      </div>
+      <div class="mb-3">
+        <label for="date_of_birth" class="form-label">Ngày sinh</label>
+        <input type="date" formControlName="date_of_birth" class="form-control" id="date_of_birth">
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Mật khẩu</label>
+        <input type="password" class="form-control" formControlName="password" placeholder="Mật khẩu" required
+          id="password" [class.is-invalid]="userProfileForm.get('password')!.invalid 
+                          && userProfileForm.get('password')!.touched">
+        @if(userProfileForm.get('password')!.invalid
+        && userProfileForm.get('password')!.touched) {
+        <div class="invalid-feedback">
+          Mật khẩu ít nhất 3 ký tự.
+        </div>
+        }
+      </div>
+      <div class="mb-3">
+        <label for="retype_password" class="form-label">Nhập lại mật khẩu</label>
+        <input type="password" class="form-control" formControlName="retype_password" placeholder="Nhập lại mật khẩu"
+          required id="retype_password" [class.is-invalid]="userProfileForm.get('retype_password')!.invalid 
+                            && userProfileForm.get('retype_password')!.touched">
+        @if(userProfileForm.hasError('passwordMismatch')) {
+        <div class="invalid-feedback">
+          Mật khẩu không khớp.
+        </div>
+        }
+      </div>
+      <div class="text-center">
+        <button type="button" (click)="save()" class="btn btn-primary">Lưu thay đổi</button>
+      </div>
+    </div>
+
+  </div>
+</form> -->

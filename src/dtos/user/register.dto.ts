@@ -14,6 +14,10 @@ export class RegisterDTO {
 
     @IsString()
     @IsNotEmpty()
+    email: string;
+
+    @IsString()
+    @IsNotEmpty()
     address: string;
 
     @IsString()
@@ -33,6 +37,7 @@ export class RegisterDTO {
     constructor(data: any) {
         this.fullname = data.fullname;
         this.phone_number = data.phone_number;
+        this.email = data.email;
         this.address = data.address;
         this.password = data.password;
         this.retype_password = data.retype_password;

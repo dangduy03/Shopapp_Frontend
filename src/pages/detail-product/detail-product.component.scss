@@ -1,34 +1,56 @@
 @import '../../styles/shared-styles.scss';
 
-.intro-section {
-    color: white;
-    padding: 20px;
-    text-align: center;
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card {
+    border: none;
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: translateY(-5px);
+    }
+}
+
+.square-image {
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
 }
 
 .product-image {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
+    max-height: 500px;
+    object-fit: contain;
+    mix-blend-mode: multiply;
 }
 
 .thumbnail-container {
     display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 10px;
 }
 
 .thumbnail-item {
-    width: 120px;
-    height: 120px;
-    margin-right: 5px;
-    /* Thêm khoảng cách ngang giữa các ảnh */
-}
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
 
-.thumbnail-item:last-child {
-    margin-right: 0;
-    /* Xóa khoảng cách ngang ở ảnh cuối cùng */
+    &:hover {
+        border-color: $shopapp-tint-color;
+        opacity: 0.8;
+    }
+
+    &.active {
+        border-color: $shopapp-tint-color;
+    }
 }
 
 .thumbnail-item img {
@@ -37,54 +59,132 @@
     object-fit: cover;
 }
 
-.thumbnail-item.active {
-    border: 4px solid $shopapp-tint-color;
-}
+.product-quantity {
+    .border-wrapper {
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid #dee2e6;
+        border-radius: 50px;
+        padding: 0.25rem 0.5rem;
 
-.product-details {
-    color: white;
-    padding: 20px;
+        input {
+            width: 40px;
+            border: none;
+            text-align: center;
+            font-weight: bold;
+
+            &:focus {
+                outline: none;
+                box-shadow: none;
+            }
+        }
+
+        button {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+    }
 }
 
 .product-actions {
     display: flex;
-    justify-content: flex-start;
-    margin-top: 20px;
+    gap: 15px;
+
+    .btn {
+        flex: 1;
+        padding: 0.75rem;
+        font-weight: 500;
+    }
 }
 
-.product-actions button {
-    margin-right: 10px;
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-size: 60%;
 }
 
-.border-wrapper {
-    border: 1px solid white;
+@media (max-width: 768px) {
+    .product-actions {
+        flex-direction: column;
+
+        .btn {
+            width: 100%;
+        }
+    }
+
+    .thumbnail-item {
+        width: 60px;
+        height: 60px;
+    }
 }
 
-.product-quantity {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin-top: 10px;
+//comment
+.comment-section {
+    margin-top: 2rem;
+    padding: 1rem;
+    border-top: 1px solid #eee;
 }
 
-.product-quantity button {
-    background-color: transparent;
-    border: none;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
+.comment-form {
+    margin-bottom: 1.5rem;
+
+    textarea {
+        width: 100%;
+        padding: 0.5rem;
+        margin-bottom: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        min-height: 80px;
+    }
+
+    button {
+        padding: 0.5rem 1rem;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+    }
 }
 
-.product-quantity input {
-    background-color: transparent;
-    border: none;
-    color: white;
-    font-size: 16px;
+.login-notice {
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 4px;
     text-align: center;
-    width: 40px;
-    margin: 0 10px;
+
+    a {
+        color: #007bff;
+        text-decoration: none;
+    }
 }
 
-.product-quantity input:focus {
-    outline: none;
+.comment-list {
+    .comment-item {
+        padding: 1rem 0;
+        border-bottom: 1px solid #f5f5f5;
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+
+            .comment-date {
+                color: #666;
+                font-size: 0.8rem;
+            }
+        }
+
+        .comment-content {
+            white-space: pre-line;
+        }
+    }
 }

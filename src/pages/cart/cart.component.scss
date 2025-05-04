@@ -1,0 +1,33 @@
+@import '../../styles/shared-styles.scss';
+
+.empty-cart {
+    background-color: $shopapp-background-color;
+    border-radius: 10px;
+    padding: 2rem;
+
+    i {
+        color: $shopapp-color;
+    }
+}
+
+.product-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.quantity-selector {
+    width: 120px;
+    justify-content: center;
+
+    button {
+        width: 30px;
+        padding: 0;
+        text-align: center;
+    }
+}
+
+.total-section {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}

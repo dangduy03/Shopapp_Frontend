@@ -9,6 +9,7 @@ import { UserResponse } from '../reponses/user/user.response';
 import { DOCUMENT } from '@angular/common';
 import { ApiResponse } from '../reponses/api.response';
 import { UpdateUserDTO } from '../dtos/user/update.user.dto';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -42,14 +43,30 @@ export class UserService {
   login(loginDTO: LoginDTO): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(this.apiLogin, loginDTO, this.apiConfig);
   }
+
   getUserDetail(token: string): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(this.apiUserDetail, {
+    return this.http.post<ApiResponse>(this.apiUserDetail, null, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      }),
+        Authorization: `Bearer ${token}`
+      })
     });
   }
+
+  getUserProfile(): Observable<UserResponse> {
+    const userResponse = this.getUserResponseFromLocalStorage();
+    if (!userResponse) {
+      throw new Error('User not found in local storage');
+    }
+    
+    return this.http.get<ApiResponse>(
+      `${environment.apiBaseUrl}/users/${userResponse.id}`,
+      this.apiConfig
+    ).pipe(
+      map(response => response.data as UserResponse)
+    );
+  }
+
   updateUserDetail(
     token: string,
     updateUserDTO: UpdateUserDTO
@@ -127,9 +144,8 @@ export class UserService {
     userId: number;
     enable: boolean;
   }): Observable<ApiResponse> {
-    const url = `${environment.apiBaseUrl}/users/block/${params.userId}/${
-      params.enable ? '1' : '0'
-    }`;
+    const url = `${environment.apiBaseUrl}/users/block/${params.userId}/${params.enable ? '1' : '0'
+      }`;
     return this.http.put<ApiResponse>(url, null, this.apiConfig);
   }
 }

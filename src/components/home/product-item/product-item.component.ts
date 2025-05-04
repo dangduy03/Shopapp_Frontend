@@ -14,8 +14,9 @@ import { Component, Input, OnInit } from '@angular/core';
       />
       <div class="card-body">
         <h5 class="card-title text-truncate">{{ name }}</h5>
+        <p class="product-description">{{ description }}</p>
         <p class="card-text">
-          {{ '$' + price }}
+          {{ price + ' VNĐ'}}
         </p>
       </div>
     </div>
@@ -25,5 +26,6 @@ export class ProductItemComponent {
   @Input() imageUrl!: String;
   @Input() name!: String;
   @Input() price!: String;
+  @Input() description!: string;
   constructor() {}
 }

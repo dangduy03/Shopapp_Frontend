@@ -11,9 +11,7 @@ import { InsertProductDTO } from '../dtos/product/insert.product.dto';
   providedIn: 'root',
 })
 export class ProductService {
-  // private apiGetProducts = `${environment.apiBaseUrl}/products`;
   private apiBaseUrl = environment.apiBaseUrl;
-
   constructor(private http: HttpClient) {}
   // Chuyển danh sách ID thành một chuỗi và truyền vào params
 
@@ -31,7 +29,6 @@ export class ProductService {
     return this.http.get<ApiResponse>(`${this.apiBaseUrl}/products`, {
       params,
     });
-    // product_image.image_url = `${environment.minioUrl}/${product_image.image_url}`;
   }
 
   getProductsForHomePage() {

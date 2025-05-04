@@ -1,51 +1,141 @@
-<div class="card product-card text-center p-3">
-    <div class="d-flex justify-content-between align-items-start mb-2">
-        <span class="badge bg-danger">Sale 50%</span>
-        <span class="badge bg-primary">Best Sale</span>
+<div class="container-fluid">
+    <h1>Orders Admin Page</h1>
+    <div class="row mb-3">
+        <div class="col-md-8">
+            <input type="text" class="form-control search-input" placeholder="Tìm đơn hàng" [(ngModel)]="keyword">
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-primary" (click)="searchOrders()">Tìm kiếm</button>
+        </div>
     </div>
 
-    <img src="../../../assets/images/Ship.png" class="img-fluid rounded mb-3" alt="Product Image">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>User ID</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Address</th>
+                <th>Note</th>
+                <th>Order Date</th>
+                <th>Status</th>
+                <th>Total Money</th>
+                <!-- <th>Shipping Method</th>
+          <th>Shipping Address</th>
+          <th>Shipping Date</th>
+          <th>Payment Method</th> -->
+                <th>Action</th>
+            </tr>
+        </thead>
 
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <button class="btn btn-outline-secondary btn-sm rounded-circle">
-            <img src="../../../assets/logo/Heart.png" alt="Heart logo">
-        </button>
-        <button class="btn btn-success px-4">Add to Cart</button>
-        <button class="btn btn-outline-secondary btn-sm rounded-circle">
-            <img src="../../../assets/logo/Eye.png" alt="Eye logo">
-        </button>
-    </div>
 
-    <h5 class="product-title">Chinese Cabbage</h5>
-    <p class="text-muted mb-1">
-        <strong class="text-success">$12.00</strong>
-        <del>$24.00</del>
-    </p>
-    <p class="text-warning mb-1">
-        <i class="bi bi-star-fill"></i>
-        <i class="bi bi-star-fill"></i>
-        <i class="bi bi-star-fill"></i>
-        <i class="bi bi-star-fill"></i>
-        <i class="bi bi-star-half"></i> (524 Feedback)
-    </p>
+        <tbody>
+            @if(orders === undefined) {
+            <!-- Trạng thái đang tải -->
+            <tr>
+                <td colspan="11" class="text-center py-3">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <span class="ms-2">Đang tải dữ liệu...</span>
+                </td>
+            </tr>
+            }
+            @else if(orders && orders.length > 0) {
+            <!-- Hiển thị danh sách đơn hàng -->
+            @for(order of orders; track order.id) {
+            <tr>
+                <td>{{ order.id || '-' }}</td>
+                <td>{{ order.user_id || '-' }}</td>
+                <td>{{ order.fullname || '-' }}</td>
+                <td>{{ order.email || '-' }}</td>
+                <td>{{ order.phone_number || '-' }}</td>
+                <td>{{ order.address || '-' }}</td>
+                <td>{{ order.note || '-' }}</td>
+                <td>
+                    @if(order.order_date) {
+                    {{ (order.order_date | date:'dd/MM/yyyy') || '-' }}
+                    } @else {
+                    -
+                    }
+                </td>
+                <td>
+                    <span class="badge" [ngClass]="{
+                        'bg-warning': order.status === 'pending',
+                        'bg-primary': order.status === 'processing',
+                        'bg-info': order.status === 'shipped',
+                        'bg-success': order.status === 'delivered',
+                        'bg-danger': order.status === 'cancelled'
+                      }">
+                        {{ order.status || '-' }}
+                    </span>
+                </td>
+                <td>{{ order.total_money | currency:'VND':'symbol':'1.0-0' }}</td>
+                <!-- <td>{{ order.shipping_method }}</td>
+          <td>{{ order.shipping_address }}</td>
+          <td>{{ order.shipping_date | date }}</td>
+          <td>{{ order.payment_method }}</td> -->
+                <td>
+                    <div class="d-flex gap-2">
+                        <button (click)="viewDetails(order)" class="btn btn-sm btn-primary">
+                            <i class="fas fa-eye"></i> Details
+                        </button>
+                        <button (click)="deleteOrder(order.id)" class="btn btn-sm btn-danger">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            }
+            }
+            @else {
+            <!-- Trường hợp không có dữ liệu -->
+            <tr>
+                <td colspan="11" class="text-center py-4 text-muted">
+                    <i class="fas fa-box-open fa-2x mb-2"></i>
+                    <p>Không tìm thấy đơn hàng nào</p>
+                    @if(keyword) {
+                    <button class="btn btn-sm btn-outline-primary" (click)="keyword = ''; searchOrders()">
+                        <i class="fas fa-times"></i> Xóa bộ lọc
+                    </button>
+                    }
+                </td>
+            </tr>
+            }
+        </tbody>
 
-    <p class="text-danger fw-bold">Hurry up! Offer ends in:</p>
+    </table>
+
     <div class="d-flex justify-content-center">
-        <div class="text-center mx-2">
-            <h6 class="mb-0">{{ days }}</h6>
-            <small>Days</small>
-        </div>
-        <div class="text-center mx-2">
-            <h6 class="mb-0">{{ hours }}</h6>
-            <small>Hours</small>
-        </div>
-        <div class="text-center mx-2">
-            <h6 class="mb-0">{{ minutes }}</h6>
-            <small>Mins</small>
-        </div>
-        <div class="text-center mx-2">
-            <h6 class="mb-0">{{ seconds }}</h6>
-            <small>Secs</small>
-        </div>
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                @if(currentPage > 1) {
+                <li class="page-item">
+                    <a class="page-link" (click)="onPageChange(1)">First</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" (click)="onPageChange(currentPage - 1)">Previous</a>
+                </li>
+                }
+
+                @for(page of visiblePages; track page) {
+                <ng-container>
+                    <li class="page-item" [ngClass]="{'active': page === currentPage}">
+                        <a class="page-link" (click)="onPageChange(page)">{{ page }}</a>
+                    </li>
+                </ng-container>
+                }
+
+                @if(currentPage < totalPages) { <li class="page-item">
+                    <a class="page-link" (click)="onPageChange(currentPage + 1)">Next</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" (click)="onPageChange(totalPages)">Last</a>
+                    </li>
+                    }
+            </ul>
+        </nav>
     </div>
 </div>
